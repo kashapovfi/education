@@ -1,0 +1,197 @@
+/* general */
+body {
+    padding-top: 65px;
+    padding-bottom: 20px;
+}
+
+span.label a {
+    color: #FFF;
+}
+
+/* blog */
+.blog-info>span {
+    display: inline-block;
+    padding-right: .7em;
+}
+
+.blog-info > h2 {
+    display: block;
+    width: 100%;
+    padding: 0;
+    margin: 0 0 .4em 0;
+}
+
+/* all widgets */
+.widget {
+    margin-bottom: 2em;
+}
+
+/* tagsCloud widget */
+.tags-cloud-widget ul.inline > li {
+    padding-left: 0;
+    line-height: 30px;
+}
+
+.tags-cloud-widget span.label {
+    padding: 4px 6px;
+}
+
+.tags-cloud-widget span.label a:hover {
+    text-decoration: none;
+}
+
+.tags-cloud-widget span.label:hover {
+    background: #F90;
+}
+
+.ya-money iframe {
+    max-width: 100%;
+    min-width: 220px;
+}
+
+/* modern layout */
+.module-info h3 {
+    margin-bottom: 0;
+}
+
+/* custom navbar */
+.navbar .brand {
+    padding: 7px 7px 7px 0;
+    margin: 0;
+}
+
+.navbar .brand > .brand-name {
+    margin: 0 5px;
+}
+
+.navbar .nav {
+    margin: 6px 10px 0 0;
+}
+
+.navbar .nav > li > a {
+    margin: 0 2px;
+}
+
+.navbar .nav > li > a:hover {
+    background-color: #E5E5E5;
+}
+
+.navbar-inner {
+    background-image: none;
+    background-color: #FFF;
+    border: 1px solid #FFC200;
+}
+
+.navbar .collapse.in {
+    top: 10px;
+}
+
+/* avatar */
+.avatar {
+    background-color: #F5F5F5 !important;
+    border: 1px solid #F5F5F5;
+    border-radius: 2px;
+    box-shadow: 1px 1px 10px 0 rgb(201, 201, 201);
+}
+
+.avatar img {
+    display: inline-block;
+    border-radius: 2px;
+}
+
+.thumbnails .items > li {
+    padding-bottom: 10px;
+}
+
+.thumbnails .items > li .thumbnail .caption h3 {
+    font-size: 16px;
+}
+
+.thumbnails .items > li .thumbnail .caption h3, .thumbnails .items > li .thumbnail .caption p {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* gallery list */
+.gallery-list {
+    margin-bottom: 30px;
+}
+
+/* comments */
+.comment-botton-right {
+    float: right;
+}
+
+.comment-body > ul li {
+    display: inline-block;
+    margin: 0 .2em 0 .8em;
+    vertical-align: middle;
+}
+
+.comment-body > p {
+    padding: .3em 1.2em .3em 0;
+    margin: 0;
+
+}
+
+.user-info {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.user-info .btn {
+    padding: 0;
+}
+
+.copyright > li:first-child {
+    margin-top: 6px;
+}
+
+/* Large desktop */
+@media (min-width: 1200px) {
+
+}
+
+/* Portrait tablet to landscape and desktop */
+@media (min-width: 768px) and (max-width: 979px) {
+    body {
+        padding-top: 0;
+    }
+
+    .navbar .brand {
+        margin-left: 30px;
+    }
+}
+
+/* Landscape phone to portrait tablet */
+@media (max-width: 767px) {
+    body {
+        padding-top: 0;
+    }
+
+    .navbar .brand {
+        margin-left: 20px;
+    }
+}
+
+/* Landscape phones and down */
+@media (max-width: 480px) {
+    .navbar .brand {
+        margin-left: 20px;
+    }
+}
+
+.relative {
+    position: relative;
+}
+
+.forkme {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 142px;
+    height: 142px;
+    background: url(../images/forkme.png) no-repeat;
+}

@@ -1,0 +1,32 @@
+<?php
+
+/**
+ * BlogsWidget виджет для вывода блогов
+ *
+ * @author yupe team <team@yupe.ru>
+ * @link http://yupe.ru
+ * @copyright 2009-2013 amyLabs && Yupe! team
+ * @package yupe.modules.blog.widgets
+ * @since 0.1
+ *
+ */
+
+Yii::import('application.modules.blog.models.Blog'); 
+ 
+class BlogsWidget extends YWidget
+{
+    public $view = 'blogswidget';
+
+    public function run()
+    { 
+        $models = Blog::model()->public()->published()->cache($this->cacheTime)->with('membersCount','postsCount')->cache($this->cacheTime)->findAll(array(
+        	'join'   => 'JOIN {{blog_user_to_blog}} utb ON utb.blog_id = t.id', 
+        	'select' => 't.name, t.slug, utb.id',        	
+        	'order'  => 'count(utb.id) DESC',
+        	'group'  => 't.slug',
+        	'limit'  => $this->limit,
+        ));
+
+        $this->render($this->view, array('models' => $models));
+    }
+}
