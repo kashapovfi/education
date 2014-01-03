@@ -1,0 +1,1 @@
+<?php echo $this->renderPartial('crud/_form', array('model' => $model)); ?>

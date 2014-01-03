@@ -4,7 +4,7 @@ if (isset($models) && !empty($models)) {
     $this->widget(
         'bootstrap.widgets.TbBox',
         array(
-            'title' => Yii::t('BlogModule.blog','Last in blogs'),
+            'title' => Yii::t('BlogModule.blog','Latest plans'),
             'headerIcon' => 'icon-pencil',
             'content' => $this->render('_links', array('models' => $models), true),
         )

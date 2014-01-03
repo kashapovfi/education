@@ -12,22 +12,16 @@
  **/
 class SiteController extends yupe\components\controllers\FrontController
 {
-    const POST_PER_PAGE = 5;
-
-    public function actionModern()
-    {
-        $this->render('modern');
-    }
-
 
     /**
      * Отображение главной страницы
      * 
      * @return void
      */
-    public function actionIndex()
-    {        
-        $this->render('welcome');
+    public function actionIndex($slug = null)
+    {
+        $blog = Blog::model()->with('posts', 'members', 'createUser')->getByUrl($slug)->published()->find();
+        $this->render('index', array('blog' => $blog));
     }
 
     /**
@@ -55,21 +49,5 @@ class SiteController extends yupe\components\controllers\FrontController
                 )
             );
         }
-    }
-
-
-    public function actionMain()
-    {
-        $dataProvider = new CActiveDataProvider('Post', array(
-            'criteria' => new CDbCriteria(array(
-                'condition' => 't.status = :status',
-                'params'    => array(':status' => Post::STATUS_PUBLISHED),
-                'limit'     => self::POST_PER_PAGE,
-                'order'     => 't.id DESC',
-                'with'      => array('createUser', 'blog','commentsCount'),
-            )),
-        ));
-
-        $this->render('main', array('dataProvider' => $dataProvider));
     }
 }
