@@ -1,23 +1,46 @@
-<div class="bootstrap-widget-header">
-    <i class="icon-star"></i>
-    <h3><?php echo CHtml::encode($plan[0]->title); ?></h3>
-</div>
+<?php if (isset($plan[0]->content)):
+    $status = $plan[0]->progress == 5
+        ? array('class' => 'btn-success', 'text' => 'COMPLETED',
+            'state' => array('disabled' => 'disabled', 'class' => 'btn btn-warning btn-large'))
+        : array('class' => 'btn-danger', 'text' => 'IN PROGRESS',
+            'state' => array('disabled' => 'disabled', 'class' => 'btn btn-warning btn-large'));
 
-<div class="bootstrap-widget-content">
-    <div class="row-fluid">
-        <div class="span12">
-          <?php echo $plan[0]->content; ?>
+    $statusCreate = Post::model()->canUserCreatePlan(Yii::app()->user->getId());
+    $statusCreate = $statusCreate === !Yii::app()->user->isSuperUser()
+        ? array('class' => 'btn btn-success btn-large')
+        : array('disabled' => 'disabled', 'class' => 'btn btn-success btn-large');
+
+    if (Yii::app()->user->isSuperUser() AND isset($status['state']['disabled']))
+        unset($status['state']['disabled']);
+
+    ?>
+    <div class="bootstrap-widget-header">
+        <i class="icon-star"></i>
+
+        <h3>My active plan</h3>
+
+        <div class="pull-right">
+            <h3>Status <span class="label <?php echo $status['class']; ?>"><?php echo $status['text']; ?></span></h3>
         </div>
     </div>
-</div>
-<br>
-<div class="pull-left">
-    <?php echo CHtml::link('<i class="icon-pencil"></i> Edit Active Plan', array('post/update', 'id' => $plan[0]->id), array('class' => 'btn btn-warning btn-large'));?>
+
+    <div class="bootstrap-widget-content">
+        <div class="row-fluid">
+            <div class="span12">
+                <?php echo $plan[0]->getQuote(); ?>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="pull-left">
+        <?php echo CHtml::link('<i class="icon-pencil"></i> Edit Active Plan', array('post/update', 'id' => $plan[0]->id), $status['state']); ?>
+    </div>
+<?php endif; ?>
+<div class="pull-right">
+    <?php echo CHtml::link('<i class="icon-check"></i> New Plan', array('post/create'), $statusCreate); ?>
 </div>
 
-<div class="pull-right">
-    <?php echo CHtml::link('<i class="icon-check"></i> New Plan', array('post/create'), array('class' => 'btn btn-success btn-large'));?>
-</div>
-<br>
-<br>
-<br>
+
+<br/>
+<br/>
+<br/>

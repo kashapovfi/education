@@ -17,13 +17,13 @@ class ActivePlanWidget extends YWidget
 
     public function run()
     {
-        $plan = Post::model()->public()->sortByPubDate('DESC')->with('commentsCount','createUser','blog')->findAll(array(
-            'condition' => 'blog_id = :blog_id',
+        $plan = Post::model()->public()->sortByPubDate('DESC')->with('commentsCount', 'createUser', 'blog')->findAll(array(
+            'condition' => 't.create_user_id = :create_user_id AND t.blog_id = 1',
             'order' => 't.id DESC',
-            'limit'  => 1,
+            'limit' => 1,
             'params' => array(
-                ':blog_id' => 1,
-                //':create_user_id' => (int)$this->userId
+//                ':blog_id' => 1,
+                ':create_user_id' => (int)$this->userId
             )
         ));
 

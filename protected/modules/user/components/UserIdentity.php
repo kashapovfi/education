@@ -27,7 +27,7 @@ class UserIdentity extends CUserIdentity
             $this->errorCode = self::ERROR_PASSWORD_INVALID;
         } else {
             // запись данных в сессию пользователя
-            $this->_id      = $user->id;
+            $this->_id = $user->id;
             $this->username = $user->nick_name;
 
             $this->setState('id', $user->id);
@@ -44,7 +44,7 @@ class UserIdentity extends CUserIdentity
                 /* Получаем настройки по всем модулям для данного пользователя: */
                 $settings = Settings::model()->fetchUserModuleSettings($user->id);
                 $sessionSettings = array();
-                
+
                 /* Если передан не пустой массив, проходим по нему: */
                 if (!empty($settings) && is_array($settings)) {
                     foreach ($settings as $sets) {

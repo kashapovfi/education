@@ -37,6 +37,7 @@
  * @property string $create_user_ip
  * @property string $image
  * @property integer $category_id
+ * @property integer $progress
  *
  * The followings are the available model relations:
  * @property User $createUser
@@ -50,6 +51,13 @@ class Post extends YModel
     const STATUS_DRAFT = 0;
     const STATUS_PUBLISHED = 1;
     const STATUS_SHEDULED = 2;
+
+    //Plan progress
+    const STATUS_CREATED = 1;
+    const STATUS_POOR_DONE = 2;
+    const STATUS_REGULAR_DONE = 3;
+    const STATUS_ALMOST_DONE = 4;
+    const STATUS_DONE = 5;
 
     const ACCESS_PUBLIC = 1;
     const ACCESS_PRIVATE = 2;
@@ -83,9 +91,9 @@ class Post extends YModel
         // NOTE: you should only define rules for those attributes that
         // will receive user inputs.
         return array(
-            array('blog_id, slug, publish_date_tmp, publish_time_tmp, title, content', 'required', 'except' => 'search'),
+            array('blog_id, publish_date_tmp, publish_time_tmp, content', 'required', 'except' => 'search'),
             array('blog_id, create_user_id, update_user_id, status, comment_status, access_type, create_date, update_date, category_id', 'numerical', 'integerOnly' => true),
-            array('blog_id, create_user_id, update_user_id, create_date, update_date, publish_date, status, comment_status, access_type', 'length', 'max' => 11),
+            array('blog_id, progress, create_user_id, update_user_id, create_date, update_date, publish_date, status, comment_status, access_type', 'length', 'max' => 11),
             array('lang', 'length', 'max' => 2),
             array('slug', 'length', 'max' => 150),
             array('image', 'length', 'max' => 300),
@@ -100,7 +108,7 @@ class Post extends YModel
             array('slug', 'YSLugValidator', 'message' => Yii::t('BlogModule.blog', 'Forbidden symbols in {attribute}')),
             array('title, slug, link, keywords, description, publish_date', 'filter', 'filter' => array($obj = new CHtmlPurifier(), 'purify')),
             array('slug', 'unique'),
-            array('id, blog_id, create_user_id, update_user_id, create_date, update_date, slug, publish_date, title, quote, content, link, status, comment_status, access_type, keywords, description, lang', 'safe', 'on' => 'search'),
+            array('id, progress, blog_id, create_user_id, update_user_id, create_date, update_date, slug, publish_date, title, quote, content, link, status, comment_status, access_type, keywords, description, lang', 'safe', 'on' => 'search'),
         );
     }
 
@@ -210,7 +218,8 @@ class Post extends YModel
             'description' => Yii::t('BlogModule.blog', 'description'),
             'tags' => Yii::t('BlogModule.blog', 'Tags'),
             'image' => Yii::t('BlogModule.blog', 'Image'),
-            'category_id' => Yii::t('BlogModule.blog', 'Category')
+            'category_id' => Yii::t('BlogModule.blog', 'Category'),
+            'progress' => 'Progress'
         );
     }
 
@@ -252,6 +261,7 @@ class Post extends YModel
 
         $criteria->compare('t.id', $this->id, true);
         $criteria->compare('blog_id', $this->blog_id);
+        $criteria->compare('progress', $this->progress);
         $criteria->compare('t.create_user_id', $this->create_user_id, true);
         $criteria->compare('t.update_user_id', $this->update_user_id, true);
         $criteria->compare('t.create_date', $this->create_date);
@@ -510,23 +520,17 @@ class Post extends YModel
      * Метод вибирає остані записи користувача
      * і повертає там результат чи можна створювати новий план
      */
-    public function canUserCreatePlan($user)
+    public function canUserCreatePlan($userId)
     {
-        if ($user) {
-            $currentDate = new DateTime(date('d-m-Y'));
+        if ($userId) {
+            $res = Yii::app()->db->createCommand()
+                ->select('create_date, create_user_id')
+                ->from('{{blog_post}}')
+                ->where('FROM_UNIXTIME(create_date) >= DATE_SUB(CURRENT_DATE, INTERVAL 1 MONTH)')
+                ->andWhere('create_user_id = :id', array(':id' => $userId))
+                ->queryRow();
 
-            $criteria = new CDbCriteria();
-            $criteria->condition = 'create_user_id = :create_user_id';
-            $criteria->params = array(':create_user_id' => (int)$user);
-
-            $results = Post::model()->findAll($criteria);
-
-            foreach ($results as $result) {
-                $a = new DateTime(date('d-m-Y', $result->create_date));
-                $diffCountMonths = $currentDate->diff($a)->m;
-
-                return $diffCountMonths >= 1 ? TRUE : FALSE;
-            }
+            return ($res) ? false : true;
         }
 
         return false;

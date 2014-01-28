@@ -28,7 +28,7 @@ class PostController extends yupe\components\controllers\FrontController
     {
         $model = new Post;
 
-        if ($model->canUserCreatePlan(Yii::app()->user->getId())) {
+        if ($model->canUserCreatePlan(Yii::app()->user->getId()) || Yii::app()->user->getState('isAdmin')) {
 
             $model->publish_date_tmp = date('d-m-Y');
             $model->publish_time_tmp = date('h:i');
@@ -47,7 +47,7 @@ class PostController extends yupe\components\controllers\FrontController
                 if ($model->save()) {
                     Yii::app()->user->setFlash(
                         YFlashMessages::SUCCESS_MESSAGE,
-                        Yii::t('BlogModule.blog', 'Post was created!')
+                        Yii::t('BlogModule.blog', 'Plan successfully created')
                     );
                     $this->redirect('/');
                 }
@@ -55,7 +55,7 @@ class PostController extends yupe\components\controllers\FrontController
         } else {
             Yii::app()->user->setFlash(
                 YFlashMessages::ERROR_MESSAGE,
-                Yii::t('BlogModule.blog', 'Ще не пройшов місяць! Тому створити новий план нізя')
+                Yii::t('BlogModule.blog', 'Only one plan per month!')
             );
             $this->redirect('/');
         }
@@ -76,6 +76,25 @@ class PostController extends yupe\components\controllers\FrontController
             throw new CHttpException(404, Yii::t('BlogModule.blog', 'Requested page was not found!'));
         }
 
+        //Не даєм редагувати чужий план, Адмін тільки може так робити :)
+        if (Yii::app()->user->getId() !== $model->create_user_id AND !Yii::app()->user->isSuperUser()) {
+            Yii::app()->user->setFlash(
+                YFlashMessages::ERROR_MESSAGE,
+                Yii::t('BlogModule.blog', 'You can edit only own plan')
+            );
+
+            $this->redirect('/');
+        }
+
+        if ($model->progress == 5 AND !Yii::app()->user->getState('isAdmin')) {
+            Yii::app()->user->setFlash(
+                YFlashMessages::ERROR_MESSAGE,
+                Yii::t('BlogModule.blog', 'You can\'t edit the completed plan!')
+            );
+
+            $this->redirect('/');
+        }
+
         if (Yii::app()->getRequest()->getIsPostRequest() && Yii::app()->getRequest()->getPost('Post')) {
             $model->setAttributes(
                 Yii::app()->getRequest()->getPost('Post')
@@ -87,7 +106,7 @@ class PostController extends yupe\components\controllers\FrontController
             if ($model->save()) {
                 Yii::app()->user->setFlash(
                     YFlashMessages::SUCCESS_MESSAGE,
-                    Yii::t('BlogModule.blog', 'Post was updated!')
+                    Yii::t('BlogModule.blog', 'Plan was successfully updated')
                 );
 
                 $this->redirect('/');
@@ -197,5 +216,12 @@ class PostController extends yupe\components\controllers\FrontController
         }
 
         $this->redirect(array('/blog/post/show', 'slug' => $post->slug), true, 301);
+    }
+
+    public function actionRating()
+    {
+        if (Yii::app()->request->isAjaxRequest) {
+
+        } else echo json_encode(array('status' => 500, 'message' => 'Bad Request'));
     }
 }

@@ -10,8 +10,8 @@
  * @since 0.1
  *
  */
-Yii::import('application.modules.blog.models.*'); 
- 
+Yii::import('application.modules.blog.models.*');
+
 class LastPostsOfBlogWidget extends YWidget
 {
     public $blogId;
@@ -20,13 +20,14 @@ class LastPostsOfBlogWidget extends YWidget
 
     public function run()
     {
-        $posts = Post::model()->public()->with('commentsCount','createUser','blog')->findAll(array(
-                'condition' => 'blog_id = :blog_id',
-            'order' => 't.id DESC',
-                'limit'  => (int)$this->limit,            
-                'params' => array(
-                    ':blog_id' => (int)$this->blogId
-                )
+        $usersCount = User::model()->findAll();
+        $posts = Post::model()->public()->recent()->with('commentsCount', 'createUser', 'blog')->findAll(array(
+            'condition' => 'blog_id = :blog_id',
+            'order' => 't.progress ASC',
+            'limit' => count($usersCount),
+            'params' => array(
+                ':blog_id' => (int)$this->blogId
+            )
         ));
 
         $this->render($this->view, array('posts' => $posts));

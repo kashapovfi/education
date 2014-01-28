@@ -15,7 +15,7 @@ class SiteController extends yupe\components\controllers\FrontController
 
     /**
      * Отображение главной страницы
-     * 
+     *
      * @return void
      */
     public function actionIndex($slug = null)
@@ -41,7 +41,7 @@ class SiteController extends yupe\components\controllers\FrontController
             echo json_encode(
                 $error
             );
-        } else {            
+        } else {
             $this->render(
                 'error',
                 array(
@@ -49,5 +49,115 @@ class SiteController extends yupe\components\controllers\FrontController
                 )
             );
         }
+    }
+
+    /**
+     * Import users
+     */
+    public function actionImport()
+    {
+        $xml = simplexml_load_file(Yii::app()->getBasePath() . '/../ternopil.xml');
+        $count = count($xml->Worksheet->Table->Row);
+
+
+        for ($i = 2; $i <= $count; $i++) {
+            $cells = $xml->Worksheet[0]->Table->Row[$i];
+
+            $index = 0;
+
+            if (!is_object($cells))
+                continue;
+
+            foreach ($cells as $cell) {
+
+                //1 - Fist and LAst name (eng)
+                //2 - position (developer, tester etc)
+                //3 - project branch
+                //8 5sb 5jn
+                //13 domen and login
+                //14 corp mail
+                //17 home phone
+                //18 mob phone
+                //23 custom mail
+                //25 skype
+                //28 Last name (uk)
+                //29 first name uk
+                //30 patronymic
+                //31 gender Male/Female
+                //35 month
+                //34 day
+
+                if ($index == 1) {
+                    //0 first name
+                    //1 last name
+                    $userName = explode(' ', $cell->Data);
+                }
+
+                if ($index == 13) {
+                    $userLogin = str_replace('eleks-software\\', '', $cell->Data);
+                }
+
+                if ($index == 2) {
+                    $position = $cell->Data;
+                }
+
+                if ($index == 30) {
+                    $patronymic = $cell->Data;
+                }
+
+                if ($index == 31) {
+                    $gender = $cell->Data == 'Male' ? User::GENDER_MALE : User::GENDER_FEMALE;
+                }
+
+                if ($index == 14) {
+                    $email = $cell->Data;
+                }
+
+                if ($index == 4) {
+                    $l1 = $cell->Data;
+                }
+
+
+                $index++;
+            }
+
+
+            try {
+                $push = new User();
+                $push->first_name = $userName[0];
+                $push->last_name = $userName[1];
+                $push->nick_name = $userLogin;
+                $push->position = $position;
+                $push->gender = $gender;
+                $push->email_confirm = 1;
+                $push->email = $email;
+                $push->L1 = $l1;
+
+                $push->save(false);
+
+            } catch (CException $e) {
+                throw new CException($e->getMessage());
+            }
+        }
+
+    }
+
+    public function actionMail()
+    {
+        if (mail('myroslav.zozulia@eleks.com', 'Test', 'Hello')) {
+            echo 'yes';
+        } else echo 'no';
+    }
+
+    public function actionHash()
+    {
+        echo CPasswordHelper::hashPassword('123456789');
+    }
+
+    public function actionTest()
+    {
+        echo 11 == 11 && 11 != 11 ? 'yes' : 'no';
+
+
     }
 }

@@ -1,10 +1,27 @@
 <script type='text/javascript'>
     $(document).ready(function () {
-        $('#post-form').liTranslit({
-            elName: '#Post_title',
-            elAlias: '#Post_slug'
+        $('#raty').raty({
+            <!--            click: function (score, evt) {-->
+            <!--                $.ajax({-->
+            <!--                    type: 'POST',-->
+            <!--                    cache: false,-->
+            <!--                    data: {score: score},-->
+            <!--                    dataType: 'json'-->
+            <!--                    url: '--><?php //echo Yii::app()->createAbsoluteUrl('post/rating'); ?><!--'-->
+            <!--                });-->
+            <!---->
+            <!--            },-->
+
+            hints: ['Not Done!', 'Poor Done!', 'Regular Done!', 'Almost Done!', 'Done!'],
+
+            target: '#hint',
+            scoreName: 'Post[progress]',
+            targetKeep: true,
+            score: <?php echo $model->progress; ?>,
+            targetText: '--Select--',
+            path: '<?php echo Yii::app()->createAbsoluteUrl('web/images'); ?>'
         });
-    })
+    });
 </script>
 
 <?php
@@ -66,7 +83,8 @@ $form = $this->beginWidget(
 //                ),
 //                'class' => 'span11'
 //            )
-//        ); ?>
+//        );
+?>
 <!--    </div>-->
 <!--    <div class="span3">-->
 <!---->
@@ -76,7 +94,8 @@ $form = $this->beginWidget(
 //                'append' => '<i class="icon-time" style="cursor:pointer"></i>',
 //                'class' => 'span11',
 //            )
-//        );?>
+//        );
+?>
 <!--    </div>-->
 <!--</div>-->
 
@@ -88,13 +107,13 @@ $form = $this->beginWidget(
 <!--    --><?php //echo $form->dropDownListRow($model, 'category_id', Category::model()->getFormattedList((int)Yii::app()->getModule('blog')->mainPostCategory), array('empty' => Yii::t('BlogModule.blog', '--choose--'), 'class' => 'popover-help span7', 'maxlength' => 11, 'data-original-title' => $model->getAttributeLabel('category_id'), 'data-content' => $model->getAttributeDescription('category_id'))); ?>
 <!--</div>-->
 
-<div class="row-fluid control-group <?php echo $model->hasErrors('title') ? 'error' : ''; ?>">
-    <?php echo $form->textFieldRow($model, 'title', array('class' => 'span7 popover-help', 'maxlength' => 250, 'size' => 60, 'data-original-title' => $model->getAttributeLabel('title'), 'data-content' => $model->getAttributeDescription('title'))); ?>
-</div>
+<!--<div class="row-fluid control-group --><?php //echo $model->hasErrors('title') ? 'error' : ''; ?><!--">-->
+<!--    --><?php //echo $form->textFieldRow($model, 'title', array('class' => 'span7 popover-help', 'maxlength' => 250, 'size' => 60, 'data-original-title' => $model->getAttributeLabel('title'), 'data-content' => $model->getAttributeDescription('title'))); ?>
+<!--</div>-->
 
-<div class="row-fluid control-group <?php echo $model->hasErrors('slug') ? 'error' : ''; ?>">
-    <?php echo $form->textFieldRow($model, 'slug', array('class' => 'span7 popover-help', 'maxlength' => 150, 'size' => 60, 'data-original-title' => $model->getAttributeLabel('slug'), 'data-content' => $model->getAttributeDescription('slug'))); ?>
-</div>
+<!--<div class="row-fluid control-group --><?php //echo $model->hasErrors('slug') ? 'error' : ''; ?><!--">-->
+<!--    --><?php //echo $form->textFieldRow($model, 'slug', array('class' => 'span7 popover-help', 'maxlength' => 150, 'size' => 60, 'data-original-title' => $model->getAttributeLabel('slug'), 'data-content' => $model->getAttributeDescription('slug'))); ?>
+<!--</div>-->
 
 <!--<div class="row-fluid control-group --><?php //echo $model->hasErrors('link') ? 'error' : ''; ?><!--">-->
 <!--    --><?php //echo $form->textFieldRow($model, 'link', array('class' => 'span7 popover-help', 'maxlength' => 250, 'size' => 60, 'data-original-title' => $model->getAttributeLabel('link'), 'data-content' => $model->getAttributeDescription('link'))); ?>
@@ -113,7 +132,8 @@ $form = $this->beginWidget(
 //                    ? ''
 //                    : 'display:none'
 //            )
-//        ); ?>
+//        );
+?>
 <!--        --><?php //echo $form->labelEx($model, 'image'); ?>
 <!--        --><?php //echo $form->fileField($model, 'image', array('onchange' => 'readURL(this);')); ?>
 <!--    </div>-->
@@ -137,6 +157,16 @@ $form = $this->beginWidget(
     </div>
 </div>
 
+<?php if (!$model->isNewRecord): ?>
+    <div class="row-fluid control-group">
+        <div class="panel panel-default">
+            <div class="panel-body" style="text-align: center;">
+                <b>Plan progress <span id="hint" class="badge">42</span></b>
+            </div>
+        </div>
+        <div id="raty"></div>
+    </div>
+<?php endif; ?>
 <!--<div class="row-fluid control-group --><?php //echo $model->hasErrors('quote') ? 'error' : ''; ?><!--">-->
 <!--    <div class="popover-help" data-original-title='--><?php //echo $model->getAttributeLabel('quote'); ?><!--'-->
 <!--         data-content='--><?php //echo $model->getAttributeDescription('quote'); ?><!--'>-->
@@ -148,7 +178,8 @@ $form = $this->beginWidget(
 //                'attribute' => 'quote',
 //                'options' => $this->module->editorOptions,
 //            )
-//        ); ?>
+//        );
+?>
 <!--    </div>-->
 <!--</div>-->
 
@@ -176,7 +207,8 @@ $form = $this->beginWidget(
 //                    'tokenSeparators' => array(',', ' ')
 //                )
 //            )
-//        ); ?>
+//        );
+?>
 <!--    </div>-->
 <!--</div>-->
 
@@ -209,16 +241,18 @@ $form = $this->beginWidget(
 //        'type' => 'primary',
 //        'label' => $model->isNewRecord ? Yii::t('BlogModule.blog', 'Create post and continue') : Yii::t('BlogModule.blog', 'Save post and continue'),
 //    )
-//); ?>
+//);
+?>
+<div class="row-fluid control-group">
+    <?php
+    $this->widget(
+        'bootstrap.widgets.TbButton', array(
+            'buttonType' => 'submit',
+            'type' => 'success',
+            'htmlOptions' => array('name' => 'submit-type', 'value' => 'index', 'class' => 'span12'),
+            'label' => $model->isNewRecord ? Yii::t('BlogModule.blog', 'Create') : Yii::t('BlogModule.blog', 'Save'),
+        )
+    ); ?>
 
-<?php
-$this->widget(
-    'bootstrap.widgets.TbButton', array(
-        'buttonType' => 'submit',
-        'type' => 'success',
-        'htmlOptions' => array('name' => 'submit-type', 'value' => 'index'),
-        'label' => $model->isNewRecord ? Yii::t('BlogModule.blog', 'Create post and close') : Yii::t('BlogModule.blog', 'Save post and close'),
-    )
-); ?>
-
-<?php $this->endWidget(); ?>
+    <?php $this->endWidget(); ?>
+</div>

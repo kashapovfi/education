@@ -6,24 +6,24 @@ $mainAssets = Yii::app()->AssetManager->publish(
     Yii::app()->theme->basePath . "/web/"
 );
 
-Yii::app()->clientScript->registerCssFile($mainAssets . '/css/last-posts.css'); ?>
+Yii::app()->clientScript->registerCssFile($mainAssets . '/css/last-posts.css');
+
+?>
 
 <div class="posts">
     <p class="posts-header">
+        <b>OUR PLANS IN THIS MONTH</b>
     </p>
 
     <div class="posts-list">
-        <?php foreach ($posts as $post): ?>
+        <?php foreach ($posts as $post):
+            $status = $post->progress == 5
+                ? array('class' => 'btn-success', 'text' => 'COMPLETED',
+                    'state' => array('disabled' => 'disabled', 'class' => 'btn btn-warning btn-large'))
+                : array('class' => 'btn-danger', 'text' => 'IN PROGRESS',
+                    'state' => array('disabled' => 'disabled', 'class' => 'btn btn-warning btn-large'));
+            ?>
             <div class="posts-list-block" style="margin-bottom: -10px">
-                <div class="posts-list-block-header">
-                    <?php echo CHtml::link(
-                        CHtml::encode($post->title), array(
-                            '/blog/post/show/',
-                            'slug' => $post->slug
-                        )
-                    ); ?>
-                </div>
-
                 <div class="posts-list-block-meta">
                     <span>
                         <i class="icon-user"></i>
@@ -42,6 +42,10 @@ Yii::app()->clientScript->registerCssFile($mainAssets . '/css/last-posts.css'); 
                         <?php echo Yii::app()->getDateFormatter()->formatDateTime(
                             $post->publish_date
                         ); ?>
+                    </span>
+
+                    <span class="pull-right">
+                        Status <span class="label <?php echo $status['class']; ?>"><?php echo $status['text']; ?></span>
                     </span>
                 </div>
 
