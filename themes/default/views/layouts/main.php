@@ -16,15 +16,21 @@ $webrootAssets = Yii::app()->assetManager->publish(
 );
 
 Yii::app()->clientScript->registerCssFile($webrootAssets . '/css/site.css');
+Yii::app()->clientScript->registerCssFile($webrootAssets . '/css/selectric.css');
 Yii::app()->clientScript->registerCssFile($mainAssets . '/css/styles.css');
 Yii::app()->clientScript->registerScriptFile($mainAssets . '/js/main.js');
 Yii::app()->clientScript->registerScriptFile($webrootAssets . '/js/jquery.raty.js');
 Yii::app()->clientScript->registerScriptFile($webrootAssets . '/js/jquery.expander.min.js');
+Yii::app()->clientScript->registerScriptFile($webrootAssets . '/js/jquery.selectric.min.js');
 Yii::app()->clientScript->registerScriptFile($webrootAssets . '/js/edu.js');
 ?>
 <!--[if IE]>
 <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 <![endif]-->
+
+<script>
+    var baseUrl = '<?php echo Yii::app()->getBaseUrl(); ?>';
+</script>
 </head>
 
 <body>

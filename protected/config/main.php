@@ -137,9 +137,9 @@ return array(
         // базовый класс CHttpRequest переопределен для загрузки файлов через ajax, подробнее: http://www.yiiframework.com/forum/index.php/topic/8689-disable-csrf-verification-per-controller-action/
         'request' => array(
             'class' => 'yupe\components\HttpRequest',
-            'enableCsrfValidation' => true,
+            'enableCsrfValidation' => false,
             'csrfTokenName' => 'YUPE_TOKEN',
-            'noCsrfValidationRoutes' => array('backend/AjaxFileUpload'),
+            'noCsrfValidationRoutes' => array('backend/AjaxFileUpload', '?r=blog/post/month'),
             'enableCookieValidation' => true, // подробнее: http://www.yiiframework.com/doc/guide/1.1/ru/topics.security#sec-4
         ),
         // подключение компонента для генерации ajax-ответов

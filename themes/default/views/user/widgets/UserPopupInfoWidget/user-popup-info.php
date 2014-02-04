@@ -1,15 +1,15 @@
 <?php
 
-Yii::app()->clientScript->registerCssFile(
-	Yii::app()->AssetManager->publish(
-    	Yii::app()->theme->basePath . "/web/css/user-popup-info.css"
-    )
-);
-
-Yii::app()->clientScript->registerScript(
-	'popover-help', "$('.popover-help').popover({ trigger: 'hover', placement: 'bottom', delay: 500, html: true });",
-	CClientScript::POS_END
-);
+//Yii::app()->clientScript->registerCssFile(
+//	Yii::app()->AssetManager->publish(
+//    	Yii::app()->theme->basePath . "/web/css/user-popup-info.css"
+//    )
+//);
+//
+//Yii::app()->clientScript->registerScript(
+//	'popover-help', "$('.popover-help').popover({ trigger: 'hover', placement: 'bottom', delay: 500, html: true });",
+//	CClientScript::POS_END
+//);
 
 ?>
 

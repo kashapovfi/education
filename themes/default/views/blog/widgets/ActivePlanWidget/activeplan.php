@@ -3,7 +3,7 @@
         ? array('class' => 'btn-success', 'text' => 'COMPLETED',
             'state' => array('disabled' => 'disabled', 'class' => 'btn btn-warning btn-large'))
         : array('class' => 'btn-danger', 'text' => 'IN PROGRESS',
-            'state' => array('disabled' => 'disabled', 'class' => 'btn btn-warning btn-large'));
+            'state' => array('class' => 'btn btn-warning btn-large'));
 
     $statusCreate = Post::model()->canUserCreatePlan(Yii::app()->user->getId());
     $statusCreate = $statusCreate === !Yii::app()->user->isSuperUser()
@@ -37,7 +37,7 @@
     </div>
 <?php endif; ?>
 <div class="pull-right">
-    <?php echo CHtml::link('<i class="icon-check"></i> New Plan', array('post/create'), $statusCreate); ?>
+    <?php echo CHtml::link('<i class="icon-check"></i> New Plan', array('post/create'), isset($statusCreate) ? $statusCreate : array('class' => 'btn btn-success btn-large')); ?>
 </div>
 
 

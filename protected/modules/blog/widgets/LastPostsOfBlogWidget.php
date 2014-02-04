@@ -15,21 +15,28 @@ Yii::import('application.modules.blog.models.*');
 class LastPostsOfBlogWidget extends YWidget
 {
     public $blogId;
-
     public $view = 'lastpostsofblog';
+    public $customPosts = false;
 
     public function run()
     {
         $usersCount = User::model()->findAll();
-        $posts = Post::model()->public()->recent()->with('commentsCount', 'createUser', 'blog')->findAll(array(
-            'condition' => 'blog_id = :blog_id',
-            'order' => 't.progress ASC',
-            'limit' => count($usersCount),
-            'params' => array(
-                ':blog_id' => (int)$this->blogId
-            )
-        ));
 
-        $this->render($this->view, array('posts' => $posts));
+        if ($this->customPosts === false) {
+            $posts = Yii::app()->db->createCommand()
+                ->select('*')
+                ->from('{{blog_post}}')
+                ->where('year(FROM_UNIXTIME(create_date)) = :year and month(FROM_UNIXTIME(create_date)) = :month',
+                    array(':year' => date('Y'), ':month' => date('m')))
+                ->andWhere('blog_id=:blog_id', array(':blog_id' => $this->blogId))
+                ->setFetchMode(PDO::FETCH_OBJ)
+                ->order('progress ASC')
+                ->limit(count($usersCount))
+                ->queryAll();
+            $this->render($this->view, array('posts' => $posts));
+        } else {
+            $this->render($this->view, array('posts' => $this->customPosts));
+        }
+
     }
 }

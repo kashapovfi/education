@@ -8,6 +8,10 @@ $mainAssets = Yii::app()->AssetManager->publish(
 
 Yii::app()->clientScript->registerCssFile($mainAssets . '/css/last-posts.css');
 
+if (is_string($posts)) {
+    echo json_encode(array('status' => 200, 'data' => $posts));
+    Yii::app()->end();
+}
 ?>
 
 <div class="posts">
@@ -28,9 +32,10 @@ Yii::app()->clientScript->registerCssFile($mainAssets . '/css/last-posts.css');
                     <span>
                         <i class="icon-user"></i>
 
-                        <?php $this->widget(
+                        <?php
+                        $this->widget(
                             'application.modules.user.widgets.UserPopupInfoWidget', array(
-                                'model' => $post->createUser
+                                'model' => User::model()->findByPk($post->create_user_id)
                             )
                         ); ?>
                     </span>

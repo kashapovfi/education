@@ -116,13 +116,6 @@ class PostController extends yupe\components\controllers\FrontController
         $this->render('crud/update', array('model' => $model));
     }
 
-    public function actionTest()
-    {
-        //var_dump();
-        //  $model = new Post;
-        // var_dump($model->canUserCreatePlan(1));
-    }
-
     /**
      * Показываем пост по урлу
      *
@@ -218,9 +211,21 @@ class PostController extends yupe\components\controllers\FrontController
         $this->redirect(array('/blog/post/show', 'slug' => $post->slug), true, 301);
     }
 
-    public function actionRating()
+    public function actionMonth()
     {
         if (Yii::app()->request->isAjaxRequest) {
+            $year = Yii::app()->request->getPost('year', 0);
+            $month = Yii::app()->request->getPost('month', 0);
+
+            $error = '<div class="alert alert-error alert-block">
+            <h4 style="text-align: center">Reports not found</h4></div>';
+
+            $posts = Post::model()->getByMonth($month, $year);
+            $posts_content = count($posts) > 0 ? $posts : $error;
+
+            $data = $this->renderPartial('//blog/widgets/LastPostsOfBlogWidget/lastpostsofblog', array('posts' => $posts_content), true);
+
+            Yii::app()->ajax->raw(array('status' => 200, 'data' => $data));
 
         } else echo json_encode(array('status' => 500, 'message' => 'Bad Request'));
     }

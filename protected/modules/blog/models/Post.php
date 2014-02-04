@@ -526,13 +526,29 @@ class Post extends YModel
             $res = Yii::app()->db->createCommand()
                 ->select('create_date, create_user_id')
                 ->from('{{blog_post}}')
-                ->where('FROM_UNIXTIME(create_date) >= DATE_SUB(CURRENT_DATE, INTERVAL 1 MONTH)')
+                ->where('FROM_UNIXTIME(create_date) >= CURRENT_DATE')
                 ->andWhere('create_user_id = :id', array(':id' => $userId))
                 ->queryRow();
 
             return ($res) ? false : true;
         }
 
+        return false;
+    }
+
+    public function getByMonth($month = false, $year = false)
+    {
+        if ($month && $year) {
+            $res = Yii::app()->db->createCommand()
+                ->select('*')
+                ->from('{{blog_post}}')
+                ->where('year(FROM_UNIXTIME(create_date)) = :year and month(FROM_UNIXTIME(create_date)) = :month',
+                    array(':year' => $year, ':month' => $month))
+                ->order('progress ASC')
+                ->setFetchMode(PDO::FETCH_OBJ)
+                ->queryAll();
+            return $res;
+        }
         return false;
     }
 }
