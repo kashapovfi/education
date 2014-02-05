@@ -13,11 +13,10 @@
         </select>
 
         <select id="reports_month" class="pull-right">
-            <?php foreach (Yii::app()->params->months as $key => $value) :  ?>
+            <?php $i=0; foreach (Yii::app()->params->months as $key => $value) :  if($i>=12)break; ?>
                 <option <?php echo date('F') !== $value ? : 'selected="selected"'; ?>
                     value="<?php echo $key; ?>"><?php echo $value; ?></option>
-
-            <?php  endforeach; ?>
+            <?php $i++; endforeach; ?>
         </select>
     </div>
 </div>

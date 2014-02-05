@@ -5,8 +5,8 @@ $this->widget('bootstrap.widgets.TbNavbar', array(
             Yii::app()->baseUrl . '/web/images/eleks.png',
             'Education Reports',
             array(
-                'width' => '38',
-                'height' => '38',
+                'width' => '40',
+                'height' => '40',
                 'title' => Yii::app()->name,
             )
         ),

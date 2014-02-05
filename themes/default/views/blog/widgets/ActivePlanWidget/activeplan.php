@@ -12,6 +12,8 @@
 
     if (Yii::app()->user->isSuperUser() AND isset($status['state']['disabled']))
         unset($status['state']['disabled']);
+    if (Yii::app()->user->isSuperUser() AND isset($statusCreate['disabled']))
+        unset($statusCreate['disabled']);
 
     ?>
     <div class="bootstrap-widget-header">

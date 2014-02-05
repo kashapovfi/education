@@ -23,16 +23,7 @@ class LastPostsOfBlogWidget extends YWidget
         $usersCount = User::model()->findAll();
 
         if ($this->customPosts === false) {
-            $posts = Yii::app()->db->createCommand()
-                ->select('*')
-                ->from('{{blog_post}}')
-                ->where('year(FROM_UNIXTIME(create_date)) = :year and month(FROM_UNIXTIME(create_date)) = :month',
-                    array(':year' => date('Y'), ':month' => date('m')))
-                ->andWhere('blog_id=:blog_id', array(':blog_id' => $this->blogId))
-                ->setFetchMode(PDO::FETCH_OBJ)
-                ->order('progress ASC')
-                ->limit(count($usersCount))
-                ->queryAll();
+            $posts = Post::model()->getByMonth(date('m'), date('Y'));
             $this->render($this->view, array('posts' => $posts));
         } else {
             $this->render($this->view, array('posts' => $this->customPosts));
