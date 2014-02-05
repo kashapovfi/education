@@ -1,0 +1,573 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="656068e4-b45b-47a7-b285-93fbedd597ca" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/.name" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/education-reports.iml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/encodings.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/frameworkRootSettings.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/scopes/scope_settings.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/workspace (Конфликтующая копия с компьютера Eleks 2014-01-03).xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/workspace (Конфликтующая копия с компьютера Hacker 2014-01-11).xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+    </list>
+    <ignored path="education-reports.iws" />
+    <ignored path=".idea/workspace.xml" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
+  <component name="ComposerSettings">
+    <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
+    <pharPath>$PROJECT_DIR$/composer.phar</pharPath>
+  </component>
+  <component name="CreatePatchCommitExecutor">
+    <option name="PATCH_PATH" value="" />
+  </component>
+  <component name="DaemonCodeAnalyzer">
+    <disable_hints />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
+  <component name="FavoritesManager">
+    <favorites_list name="education-reports" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf />
+  </component>
+  <component name="FindManager">
+    <FindUsagesManager>
+      <setting name="OPEN_NEW_TAB" value="false" />
+    </FindUsagesManager>
+  </component>
+  <component name="Git.Settings">
+    <option name="PREVIOUS_COMMIT_AUTHORS">
+      <list>
+        <option value="Myroslav.Zozulia" />
+      </list>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitLogSettings">
+    <option name="myDateState">
+      <MyDateState />
+    </option>
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="changedFiles">
+      <list>
+        <option value="$PROJECT_DIR$/themes/default/views/blog/post/test.php" />
+        <option value="$PROJECT_DIR$/public/web/css/selectric.css" />
+        <option value="$PROJECT_DIR$/protected/config/modules/blog.php" />
+        <option value="$PROJECT_DIR$/themes/default/views/user/widgets/UserPopupInfoWidget/user-popup-info.php" />
+        <option value="$PROJECT_DIR$/protected/modules/user/models/User.php" />
+        <option value="$PROJECT_DIR$/protected/modules/user/forms/ProfileForm.php" />
+        <option value="$PROJECT_DIR$/protected/modules/blog/controllers/PostController.php" />
+        <option value="$PROJECT_DIR$/protected/config/main.php" />
+        <option value="$PROJECT_DIR$/themes/default/views/layouts/main.php" />
+        <option value="$PROJECT_DIR$/protected/config/params.php" />
+        <option value="$PROJECT_DIR$/themes/default/views/blog/widgets/LastPostsOfBlogWidget/lastpostsofblog.php" />
+        <option value="$PROJECT_DIR$/protected/modules/blog/models/Post.php" />
+        <option value="$PROJECT_DIR$/public/web/js/edu.js" />
+        <option value="$PROJECT_DIR$/protected/modules/blog/widgets/LastPostsOfBlogWidget.php" />
+        <option value="$PROJECT_DIR$/themes/default/views/blog/widgets/ActivePlanWidget/activeplan.php" />
+        <option value="$PROJECT_DIR$/themes/default/views/site/index.php" />
+        <option value="$PROJECT_DIR$/themes/default/views/menu/widgets/MenuWidget/main.php" />
+      </list>
+    </option>
+  </component>
+  <component name="PhpServers">
+    <option name="servers">
+      <server host="localhost" name="localhost" port="90" />
+    </option>
+  </component>
+  <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" interpreter_name="5.3">
+    <include_path>
+      <path value="$PROJECT_DIR$/vendor/phpunit/php-file-iterator" />
+      <path value="$PROJECT_DIR$/vendor/facebook/php-sdk" />
+      <path value="$PROJECT_DIR$/vendor/composer" />
+      <path value="$PROJECT_DIR$/vendor/monolog/monolog" />
+      <path value="$PROJECT_DIR$/vendor/clevertech/yii-booster" />
+      <path value="$PROJECT_DIR$/vendor/alexandresalome/php-selenium" />
+      <path value="$PROJECT_DIR$/vendor/zhuravljov/yii2-debug" />
+      <path value="$PROJECT_DIR$/vendor/psr/log" />
+      <path value="$PROJECT_DIR$/vendor/phpunit/php-code-coverage" />
+      <path value="$PROJECT_DIR$/vendor/phpunit/php-token-stream" />
+      <path value="$PROJECT_DIR$/vendor/phpunit/php-text-template" />
+      <path value="$PROJECT_DIR$/vendor/phpunit/phpunit-mock-objects" />
+      <path value="$PROJECT_DIR$/vendor/phpunit/php-timer" />
+      <path value="$PROJECT_DIR$/vendor/phpunit/phpunit" />
+      <path value="$PROJECT_DIR$/vendor/guzzle/parser" />
+      <path value="$PROJECT_DIR$/vendor/guzzle/common" />
+      <path value="$PROJECT_DIR$/vendor/guzzle/stream" />
+      <path value="$PROJECT_DIR$/vendor/yiiext/nested-set-behavior" />
+      <path value="$PROJECT_DIR$/vendor/yiiext/imperavi-redactor-widget" />
+      <path value="$PROJECT_DIR$/vendor/guzzle/http" />
+      <path value="$PROJECT_DIR$/vendor/symfony/console" />
+      <path value="$PROJECT_DIR$/vendor/behat/mink-zombie-driver" />
+      <path value="$PROJECT_DIR$/vendor/behat/mink-selenium2-driver" />
+      <path value="$PROJECT_DIR$/vendor/symfony/finder" />
+      <path value="$PROJECT_DIR$/vendor/codeception/codeception" />
+      <path value="$PROJECT_DIR$/vendor/symfony/css-selector" />
+      <path value="$PROJECT_DIR$/vendor/symfony/process" />
+      <path value="$PROJECT_DIR$/vendor/yiisoft/yii" />
+      <path value="$PROJECT_DIR$/vendor/symfony/event-dispatcher" />
+      <path value="$PROJECT_DIR$/vendor/behat/mink-selenium-driver" />
+      <path value="$PROJECT_DIR$/vendor/symfony/dom-crawler" />
+      <path value="$PROJECT_DIR$/vendor/behat/mink-goutte-driver" />
+      <path value="$PROJECT_DIR$/vendor/behat/mink" />
+      <path value="$PROJECT_DIR$/vendor/symfony/yaml" />
+      <path value="$PROJECT_DIR$/vendor/symfony/browser-kit" />
+      <path value="$PROJECT_DIR$/vendor/behat/mink-browserkit-driver" />
+      <path value="$PROJECT_DIR$/vendor/fabpot/goutte" />
+      <path value="$PROJECT_DIR$/vendor/videlalvaro/php-amqplib" />
+      <path value="$PROJECT_DIR$/vendor/instaclick/php-webdriver" />
+    </include_path>
+  </component>
+  <component name="ProjectFrameBounds">
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
+    <option name="width" value="1932" />
+    <option name="height" value="1056" />
+  </component>
+  <component name="ProjectInspectionProfilesVisibleTreeState">
+    <entry key="Project Default">
+      <profile-state>
+        <expanded-state>
+          <State>
+            <id />
+          </State>
+        </expanded-state>
+        <selected-state>
+          <State>
+            <id>CoffeeScript</id>
+          </State>
+        </selected-state>
+      </profile-state>
+    </entry>
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <OptionsSetting value="true" id="Add" />
+    <OptionsSetting value="true" id="Remove" />
+    <OptionsSetting value="true" id="Checkout" />
+    <OptionsSetting value="true" id="Update" />
+    <OptionsSetting value="true" id="Status" />
+    <OptionsSetting value="true" id="Edit" />
+    <ConfirmationsSetting value="2" id="Add" />
+    <ConfirmationsSetting value="0" id="Remove" />
+  </component>
+  <component name="ProjectReloadState">
+    <option name="STATE" value="0" />
+  </component>
+  <component name="ProjectView">
+    <navigator currentView="ProjectPane" proportions="" version="1" splitterProportion="0.5">
+      <flattenPackages />
+      <showMembers />
+      <showModules />
+      <showLibraryContents />
+      <hideEmptyPackages />
+      <abbreviatePackageNames />
+      <autoscrollToSource />
+      <autoscrollFromSource />
+      <sortByType />
+    </navigator>
+    <panes>
+      <pane id="Scope" />
+      <pane id="ProjectPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="education-reports" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder0" value="0" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth0" value="282" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth1" value="310" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder3" value="3" />
+    <property name="options.splitter.main.proportions" value="0.3" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder1" value="1" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder2" value="2" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth0" value="304" />
+    <property name="options.lastSelected" value="project.propVCSSupport.Mappings" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder1" value="1" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder0" value="0" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../elekslabs" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth2" value="312" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth3" value="979" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth3" value="986" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth2" value="304" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth1" value="303" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder2" value="2" />
+    <property name="WebServerToolWindowFactoryState" value="true" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder3" value="3" />
+    <property name="FullScreen" value="false" />
+    <property name="options.splitter.details.proportions" value="0.2" />
+    <property name="options.searchVisible" value="true" />
+    <property name="LayoutCode.rearrangeEntriesPHP" value="false" />
+    <property name="PluginClearCache.Paths" value="[[C:\Users\myroslav.zozulia\Dropbox\www\localhost\education-reports, .idea]]" />
+    <property name="PluginClearCache.DeleteDirectories" value="0" />
+    <property name="PluginClearCache.DeleteHidden" value="0" />
+    <property name="PluginClearCache.IgnorePatterns" value="" />
+    <property name="recentsLimit" value="5" />
+    <property name="restartRequiresConfirmation" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\myroslav.zozulia\Dropbox\www\localhost\education-reports\public\web\css" />
+      <recent name="C:\Users\myroslav.zozulia\Dropbox\www\localhost\education-reports\public\web\js" />
+      <recent name="C:\Users\myroslav.zozulia\Dropbox\www\localhost\education-reports" />
+      <recent name="C:\Users\myroslav.zozulia\Dropbox\www\localhost\education-reports\themes\default\web\images" />
+    </key>
+  </component>
+  <component name="RunManager" selected="PHP Web Application.onLocalhost">
+    <configuration default="true" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
+      <TestRunner />
+      <method />
+    </configuration>
+    <configuration default="true" type="PhpWebAppRunConfigurationType" factoryName="PHP Web Application">
+      <method />
+    </configuration>
+    <configuration default="true" type="PhpLocalRunConfigurationType" factoryName="PHP Console">
+      <method />
+    </configuration>
+    <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug" singleton="true">
+      <method />
+    </configuration>
+    <configuration default="true" type="NodeJSConfigurationType" factoryName="Node.js" working-dir="">
+      <browser start="false" url="" with-js-debugger="false" />
+      <method />
+    </configuration>
+    <configuration default="true" type="PhpUnitRemoteRunConfigurationType" factoryName="PHPUnit on Server">
+      <method />
+    </configuration>
+    <configuration default="false" name="onLocalhost" type="PhpWebAppRunConfigurationType" factoryName="PHP Web Application" server_name="localhost" start_url="/education-reports/public">
+      <RunnerSettings RunnerId="PhpWebAppDebugRunner" />
+      <ConfigurationWrapper RunnerId="PhpWebAppDebugRunner" />
+      <method />
+    </configuration>
+    <list size="1">
+      <item index="0" class="java.lang.String" itemvalue="PHP Web Application.onLocalhost" />
+    </list>
+  </component>
+  <component name="ShelveChangesManager" show_recycled="false" />
+  <component name="SvnConfiguration" maxAnnotateRevisions="500" myUseAcceleration="nothing" myAutoUpdateAfterCommit="false" cleanupOnStartRun="false" SSL_PROTOCOLS="all">
+    <option name="USER" value="" />
+    <option name="PASSWORD" value="" />
+    <option name="mySSHConnectionTimeout" value="30000" />
+    <option name="mySSHReadTimeout" value="30000" />
+    <option name="LAST_MERGED_REVISION" />
+    <option name="MERGE_DRY_RUN" value="false" />
+    <option name="MERGE_DIFF_USE_ANCESTRY" value="true" />
+    <option name="UPDATE_LOCK_ON_DEMAND" value="false" />
+    <option name="IGNORE_SPACES_IN_MERGE" value="false" />
+    <option name="CHECK_NESTED_FOR_QUICK_MERGE" value="false" />
+    <option name="IGNORE_SPACES_IN_ANNOTATE" value="true" />
+    <option name="SHOW_MERGE_SOURCES_IN_ANNOTATE" value="true" />
+    <option name="FORCE_UPDATE" value="false" />
+    <option name="IGNORE_EXTERNALS" value="false" />
+    <myIsUseDefaultProxy>false</myIsUseDefaultProxy>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="656068e4-b45b-47a7-b285-93fbedd597ca" name="Default" comment="" />
+      <created>1388672263192</created>
+      <updated>1388672263192</updated>
+    </task>
+    <task id="LOCAL-00001" summary="В конфігах деякі параметри поправлені&#10;Тест функції в сайт контролері (там і імпорт юзерів з хмлки)&#10;">
+      <created>1390904021890</created>
+      <updated>1390904021890</updated>
+    </task>
+    <task id="LOCAL-00002" summary="1) noCsrfValidationRoutes добавлений роут щоб аякс запит не вбивало&#10;2) Array з місяцями&#10;3) Ajax method for posts">
+      <created>1391518516158</created>
+      <updated>1391518516158</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Оптимізація взятят постів в віджеті&#10;дісаблед стейт поправлений для кнопок&#10;коунт для циклу місяців бо чомусь їх завжди виводиться 24 замість 12">
+      <created>1391595879734</created>
+      <updated>1391595879734</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Потрібні файли">
+      <created>1391598565999</created>
+      <updated>1391598565999</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Потрібні файли&#10;">
+      <created>1391598611573</created>
+      <updated>1391598611573</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
+    <servers />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-8" y="-8" width="1932" height="1056" extended-state="0" />
+    <editor active="false" />
+    <layout>
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Framework" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39936775" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Mongo Runner" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22023182" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32899022" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Mongo Explorer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.14196242" sideWeight="0.6710098" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="DB Browser" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="DB Execution Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32899022" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Command Line Tools Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32899022" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+    </layout>
+  </component>
+  <component name="Vcs.Log.UiProperties">
+    <option name="RECENTLY_FILTERED_USER_GROUPS">
+      <collection />
+    </option>
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
+    <option name="CHECK_NEW_TODO" value="false" />
+    <option name="myTodoPanelSettings">
+      <TodoPanelSettings />
+    </option>
+    <MESSAGE value="В конфігах деякі параметри поправлені&#10;Тест функції в сайт контролері (там і імпорт юзерів з хмлки)&#10;" />
+    <MESSAGE value="1) noCsrfValidationRoutes добавлений роут щоб аякс запит не вбивало&#10;2) Array з місяцями&#10;3) Ajax method for posts" />
+    <MESSAGE value="Оптимізація взятят постів в віджеті&#10;дісаблед стейт поправлений для кнопок&#10;коунт для циклу місяців бо чомусь їх завжди виводиться 24 замість 12" />
+    <MESSAGE value="Потрібні файли" />
+    <MESSAGE value="Потрібні файли&#10;" />
+    <option name="LAST_COMMIT_MESSAGE" value="Потрібні файли&#10;" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <option name="time" value="7" />
+    </breakpoint-manager>
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/themes/default/views/site/index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="19" column="18" selection-start="814" selection-end="814" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="476" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/config/params.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="19" selection-start="19" selection-end="19" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="153" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/config/main.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="141" column="73" selection-start="6746" selection-end="6746" vertical-scroll-proportion="0.0" vertical-offset="2397" max-vertical-offset="3264" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/modules/blog/widgets/LastPostsOfBlogWidget.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="28" column="25" selection-start="708" selection-end="708" vertical-scroll-proportion="0.0" vertical-offset="476" max-vertical-offset="782" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/web/js/edu.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="38" column="31" selection-start="1103" selection-end="1103" vertical-scroll-proportion="0.0" vertical-offset="646" max-vertical-offset="850" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/themes/default/views/blog/widgets/LastPostsOfBlogWidget/lastpostsofblog.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="14" column="0" selection-start="350" selection-end="350" vertical-scroll-proportion="0.0" vertical-offset="238" max-vertical-offset="1173" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/themes/default/views/site/index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="15" column="90" selection-start="641" selection-end="641" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="476" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/config/params.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="19" selection-start="19" selection-end="19" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="153" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/config/main.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="141" column="73" selection-start="6746" selection-end="6746" vertical-scroll-proportion="0.0" vertical-offset="2397" max-vertical-offset="3264" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/modules/blog/widgets/LastPostsOfBlogWidget.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="15" column="1" selection-start="342" selection-end="342" vertical-scroll-proportion="0.0" vertical-offset="255" max-vertical-offset="799" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/web/js/edu.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="38" column="31" selection-start="1103" selection-end="1103" vertical-scroll-proportion="0.0" vertical-offset="646" max-vertical-offset="850" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/themes/default/views/blog/widgets/LastPostsOfBlogWidget/lastpostsofblog.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="14" column="0" selection-start="350" selection-end="350" vertical-scroll-proportion="0.0" vertical-offset="238" max-vertical-offset="1173" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/themes/default/views/site/index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="15" column="90" selection-start="641" selection-end="641" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="476" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/config/params.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="19" selection-start="19" selection-end="19" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="153" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/config/main.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="141" column="73" selection-start="6746" selection-end="6746" vertical-scroll-proportion="0.0" vertical-offset="2397" max-vertical-offset="3264" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/modules/blog/widgets/LastPostsOfBlogWidget.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="33" column="23" selection-start="990" selection-end="995" vertical-scroll-proportion="0.0" vertical-offset="561" max-vertical-offset="799" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/web/js/edu.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="38" column="31" selection-start="1103" selection-end="1103" vertical-scroll-proportion="0.0" vertical-offset="646" max-vertical-offset="850" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/themes/default/views/blog/widgets/LastPostsOfBlogWidget/lastpostsofblog.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="14" column="0" selection-start="350" selection-end="350" vertical-scroll-proportion="0.0" vertical-offset="238" max-vertical-offset="1173" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/modules/mail/MailModule.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-3.385159" vertical-offset="1916" max-vertical-offset="2482" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/modules/mail/components/YMailMessage.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="15" column="0" selection-start="405" selection-end="405" vertical-scroll-proportion="-2.5229683" vertical-offset="1683" max-vertical-offset="2295" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/config/modules/mail.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="592" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/config/messages.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="592" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/config/test.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-1.2826855" vertical-offset="726" max-vertical-offset="1292" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/config/db.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="592" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/config/db.back.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="592" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/themes/default/views/layouts/main.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="31" column="8" selection-start="1542" selection-end="1542" vertical-scroll-proportion="0.5106007" vertical-offset="238" max-vertical-offset="1428" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/yiic">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="923">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/config/params.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="19" selection-start="19" selection-end="19" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="566" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/web/js/edu.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="16" column="0" selection-start="480" selection-end="480" vertical-scroll-proportion="0.29469123" vertical-offset="0" max-vertical-offset="923" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/config/main.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="141" column="73" selection-start="6746" selection-end="6746" vertical-scroll-proportion="0.8862876" vertical-offset="1330" max-vertical-offset="2992" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/modules/blog/controllers/PostController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="222" column="39" selection-start="6597" selection-end="6597" vertical-scroll-proportion="0.71571904" vertical-offset="3132" max-vertical-offset="4029" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/modules/blog/models/Post.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="538" column="20" selection-start="20792" selection-end="20792" vertical-scroll-proportion="0.5769231" vertical-offset="8449" max-vertical-offset="9333" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/themes/default/views/blog/blog/index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="884" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/themes/default/views/blog/post/index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="897" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/themes/default/views/blog/widgets/ActivePlanWidget/activeplan.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="14" column="62" selection-start="854" selection-end="854" vertical-scroll-proportion="0.2419175" vertical-offset="21" max-vertical-offset="918" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/modules/blog/widgets/LastPostsOfBlogWidget.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="25" column="65" selection-start="625" selection-end="625" vertical-scroll-proportion="0.47380155" vertical-offset="0" max-vertical-offset="897" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/themes/default/views/blog/widgets/LastPostsOfBlogWidget/lastpostsofblog.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="14" column="0" selection-start="350" selection-end="350" vertical-scroll-proportion="-0.042363435" vertical-offset="276" max-vertical-offset="1173" />
+      </provider>
+    </entry>
+    <entry file="file://C:/latest/OpenServer/modules/system/html/openserver/check.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="1" column="0" selection-start="6" selection-end="6" vertical-scroll-proportion="0.032818533" vertical-offset="0" max-vertical-offset="518" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/themes/default/views/menu/widgets/MenuWidget/main.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="1" column="10" selection-start="16" selection-end="16" vertical-scroll-proportion="0.032818533" vertical-offset="0" max-vertical-offset="561" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/themes/default/views/site/index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="15" column="0" selection-start="551" selection-end="551" vertical-scroll-proportion="0.49227798" vertical-offset="0" max-vertical-offset="518" />
+      </provider>
+    </entry>
+  </component>
+</project>
+
