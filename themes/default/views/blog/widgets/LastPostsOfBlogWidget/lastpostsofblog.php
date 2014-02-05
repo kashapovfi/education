@@ -27,8 +27,11 @@ if (is_string($posts)) {
                 : array('class' => 'btn-danger', 'text' => 'IN PROGRESS',
                     'state' => array('disabled' => 'disabled', 'class' => 'btn btn-warning btn-large'));
             ?>
-            <div class="posts-list-block" style="margin-bottom: -10px">
-                <div class="posts-list-block-meta">
+            <div class="panel panel-default posts-list-block">
+                                    <span class="pull-right" style="padding: 10px">
+                        <span class="label <?php echo $status['class']; ?>"><?php echo $status['text']; ?></span>
+                    </span>
+                <div class="posts-list-block-meta panel-body">
                     <span>
                         <i class="icon-user"></i>
 
@@ -49,9 +52,7 @@ if (is_string($posts)) {
                         ); ?>
                     </span>
 
-                    <span class="pull-right">
-                        Status <span class="label <?php echo $status['class']; ?>"><?php echo $status['text']; ?></span>
-                    </span>
+
                 </div>
 
                 <div class="posts-list-block-text">

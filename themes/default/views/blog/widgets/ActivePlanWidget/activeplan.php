@@ -16,17 +16,17 @@
         unset($statusCreate['disabled']);
 
     ?>
-    <div class="bootstrap-widget-header">
+    <div class="yupe-widget-header">
         <i class="icon-star"></i>
 
         <h3>My active plan</h3>
 
         <div class="pull-right">
-            <h3>Status <span class="label <?php echo $status['class']; ?>"><?php echo $status['text']; ?></span></h3>
+            <h3><span class="label <?php echo $status['class']; ?>"><?php echo $status['text']; ?></span></h3>
         </div>
     </div>
 
-    <div class="bootstrap-widget-content">
+    <div class="yupe-widget-content">
         <div class="row-fluid">
             <div class="span12">
                 <?php echo $plan[0]->getQuote(); ?>
@@ -35,11 +35,11 @@
     </div>
     <br>
     <div class="pull-left">
-        <?php echo CHtml::link('<i class="icon-pencil"></i> Edit Active Plan', array('post/update', 'id' => $plan[0]->id), $status['state']); ?>
+        <?php echo CHtml::link('<i class="icon-pencil icon-white"></i> Edit Active Plan', array('post/update', 'id' => $plan[0]->id), $status['state']); ?>
     </div>
 <?php endif; ?>
 <div class="pull-right">
-    <?php echo CHtml::link('<i class="icon-check"></i> New Plan', array('post/create'), isset($statusCreate) ? $statusCreate : array('class' => 'btn btn-success btn-large')); ?>
+    <?php echo CHtml::link('<i class="icon-check icon-white"></i> New Plan', array('post/create'), isset($statusCreate) ? $statusCreate : array('class' => 'btn btn-success btn-large')); ?>
 </div>
 
 

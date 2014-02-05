@@ -1,4 +1,5 @@
 <?php
+
 /**
  * PostController контроллер для постов на публичной части сайта
  *
@@ -30,9 +31,8 @@ class PostController extends yupe\components\controllers\FrontController
 
         if ($model->canUserCreatePlan(Yii::app()->user->getId()) || Yii::app()->user->getState('isAdmin')) {
 
-            $model->publish_date_tmp = date('d-m-Y');
-            $model->publish_time_tmp = date('h:i');
-            //Set
+            $model->publish_date = date('d-m-Y h:i');
+
             $model->blog_id = 1;
             $model->status = POST::STATUS_PUBLISHED;
 
@@ -46,7 +46,7 @@ class PostController extends yupe\components\controllers\FrontController
 
                 if ($model->save()) {
                     Yii::app()->user->setFlash(
-                        YFlashMessages::SUCCESS_MESSAGE,
+                        yupe\widgets\YFlashMessages::SUCCESS_MESSAGE,
                         Yii::t('BlogModule.blog', 'Plan successfully created')
                     );
                     $this->redirect('/');
@@ -54,7 +54,7 @@ class PostController extends yupe\components\controllers\FrontController
             }
         } else {
             Yii::app()->user->setFlash(
-                YFlashMessages::ERROR_MESSAGE,
+                yupe\widgets\YFlashMessages::ERROR_MESSAGE,
                 Yii::t('BlogModule.blog', 'Only one plan per month!')
             );
             $this->redirect('/');
@@ -79,7 +79,7 @@ class PostController extends yupe\components\controllers\FrontController
         //Не даєм редагувати чужий план, Адмін тільки може так робити :)
         if (Yii::app()->user->getId() !== $model->create_user_id AND !Yii::app()->user->isSuperUser()) {
             Yii::app()->user->setFlash(
-                YFlashMessages::ERROR_MESSAGE,
+                yupe\widgets\YFlashMessages::ERROR_MESSAGE,
                 Yii::t('BlogModule.blog', 'You can edit only own plan')
             );
 
@@ -88,7 +88,7 @@ class PostController extends yupe\components\controllers\FrontController
 
         if ($model->progress == 5 AND !Yii::app()->user->getState('isAdmin')) {
             Yii::app()->user->setFlash(
-                YFlashMessages::ERROR_MESSAGE,
+                yupe\widgets\YFlashMessages::ERROR_MESSAGE,
                 Yii::t('BlogModule.blog', 'You can\'t edit the completed plan!')
             );
 
@@ -105,7 +105,7 @@ class PostController extends yupe\components\controllers\FrontController
 
             if ($model->save()) {
                 Yii::app()->user->setFlash(
-                    YFlashMessages::SUCCESS_MESSAGE,
+                    yupe\widgets\YFlashMessages::SUCCESS_MESSAGE,
                     Yii::t('BlogModule.blog', 'Plan was successfully updated')
                 );
 
@@ -152,7 +152,8 @@ class PostController extends yupe\components\controllers\FrontController
         }
 
         $this->render(
-            'list', array(
+            'list',
+            array(
                 'posts' => $posts,
                 'tag' => $tag,
             )
@@ -179,9 +180,12 @@ class PostController extends yupe\components\controllers\FrontController
 
     public function actionCategory($alias)
     {
-        $category = Category::model()->cache($this->yupe->coreCacheTime)->find('alias = :alias', array(
-            ':alias' => $alias
-        ));
+        $category = Category::model()->cache($this->yupe->coreCacheTime)->find(
+            'alias = :alias',
+            array(
+                ':alias' => $alias
+            )
+        );
 
         if (null === $category) {
             throw new CHttpException(404, Yii::t('BlogModule.blog', 'Page was not found!'));
@@ -223,10 +227,16 @@ class PostController extends yupe\components\controllers\FrontController
             $posts = Post::model()->getByMonth($month, $year);
             $posts_content = count($posts) > 0 ? $posts : $error;
 
-            $data = $this->renderPartial('//blog/widgets/LastPostsOfBlogWidget/lastpostsofblog', array('posts' => $posts_content), true);
+            $data = $this->renderPartial(
+                '//blog/widgets/LastPostsOfBlogWidget/lastpostsofblog',
+                array('posts' => $posts_content),
+                true
+            );
 
             Yii::app()->ajax->raw(array('status' => 200, 'data' => $data));
 
-        } else echo json_encode(array('status' => 500, 'message' => 'Bad Request'));
+        } else {
+            echo json_encode(array('status' => 500, 'message' => 'Bad Request'));
+        }
     }
 }

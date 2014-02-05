@@ -15,6 +15,7 @@ $webrootAssets = Yii::app()->assetManager->publish(
     Yii::getPathOfAlias('webroot.web')
 );
 
+Yii::app()->clientScript->registerCssFile($webrootAssets . '/css/yupe.css');
 Yii::app()->clientScript->registerCssFile($webrootAssets . '/css/site.css');
 Yii::app()->clientScript->registerCssFile($webrootAssets . '/css/selectric.css');
 Yii::app()->clientScript->registerCssFile($mainAssets . '/css/styles.css');
@@ -48,7 +49,7 @@ Yii::app()->clientScript->registerScriptFile($webrootAssets . '/js/edu.js');
         <!-- content -->
         <section class="span9 content">
             <!-- flashMessages -->
-            <?php $this->widget('YFlashMessages'); ?>
+            <?php $this->widget('yupe\widgets\YFlashMessages'); ?>
             <?php echo $content; ?>
         </section>
         <!-- content end-->

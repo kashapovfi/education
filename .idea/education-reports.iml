@@ -42,18 +42,14 @@
       <excludeFolder url="file://$MODULE_DIR$/themes/default/views/yupe" />
       <excludeFolder url="file://$MODULE_DIR$/themes/default/views/zendsearch" />
       <excludeFolder url="file://$MODULE_DIR$/vendor" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/alexandresalome/php-selenium" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/behat/mink" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/behat/mink-browserkit-driver" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/behat/mink-goutte-driver" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/behat/mink-selenium-driver" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/behat/mink-selenium2-driver" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/behat/mink-zombie-driver" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/clevertech/yii-booster" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/codeception/codeception" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/composer" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/fabpot/goutte" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/facebook/php-sdk" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/guzzle/common" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/guzzle/http" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/guzzle/parser" />
@@ -76,7 +72,6 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/finder" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/process" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/yaml" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/videlalvaro/php-amqplib" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/yiiext/imperavi-redactor-widget" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/yiiext/nested-set-behavior" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/yiisoft/yii" />
@@ -89,21 +84,19 @@
         <CLASSES>
           <root url="phar://$MODULE_DIR$/vendor/codeception/codeception/package/codecept.phar" />
           <root url="phar://$MODULE_DIR$/composer.phar" />
-          <root url="phar://$MODULE_DIR$/vendor/fabpot/goutte/goutte.phar" />
         </CLASSES>
         <SOURCES>
           <root url="phar://$MODULE_DIR$/vendor/codeception/codeception/package/codecept.phar" />
           <root url="phar://$MODULE_DIR$/composer.phar" />
-          <root url="phar://$MODULE_DIR$/vendor/fabpot/goutte/goutte.phar" />
         </SOURCES>
       </library>
     </orderEntry>
     <orderEntry type="module-library">
       <library name="PHP">
         <CLASSES>
+          <root url="file://$MODULE_DIR$/vendor/facebook/webdriver" />
           <root url="file://$MODULE_DIR$/vendor/symfony/css-selector" />
           <root url="file://$MODULE_DIR$/vendor/symfony/console" />
-          <root url="file://$MODULE_DIR$/vendor/behat/mink-zombie-driver" />
           <root url="file://$MODULE_DIR$/vendor/yiiext/nested-set-behavior" />
           <root url="file://$MODULE_DIR$/vendor/monolog/monolog" />
           <root url="file://$MODULE_DIR$/vendor/guzzle/stream" />
@@ -114,7 +107,6 @@
           <root url="file://$MODULE_DIR$/vendor/behat/mink-browserkit-driver" />
           <root url="file://$MODULE_DIR$/vendor/behat/mink-goutte-driver" />
           <root url="file://$MODULE_DIR$/vendor/guzzle/http" />
-          <root url="file://$MODULE_DIR$/vendor/alexandresalome/php-selenium" />
           <root url="file://$MODULE_DIR$/vendor/yiisoft/yii" />
           <root url="file://$MODULE_DIR$/vendor/symfony/process" />
           <root url="file://$MODULE_DIR$/vendor/guzzle/parser" />
@@ -135,16 +127,13 @@
           <root url="file://$MODULE_DIR$/vendor/yiiext/imperavi-redactor-widget" />
           <root url="file://$MODULE_DIR$/vendor/symfony/browser-kit" />
           <root url="file://$MODULE_DIR$/vendor/fabpot/goutte" />
-          <root url="file://$MODULE_DIR$/vendor/videlalvaro/php-amqplib" />
-          <root url="file://$MODULE_DIR$/vendor/facebook/php-sdk" />
           <root url="file://$MODULE_DIR$/vendor/zhuravljov/yii2-debug" />
           <root url="file://$MODULE_DIR$/vendor/phpunit/php-timer" />
-          <root url="file://$MODULE_DIR$/vendor/behat/mink-selenium-driver" />
         </CLASSES>
         <SOURCES>
+          <root url="file://$MODULE_DIR$/vendor/facebook/webdriver" />
           <root url="file://$MODULE_DIR$/vendor/symfony/css-selector" />
           <root url="file://$MODULE_DIR$/vendor/symfony/console" />
-          <root url="file://$MODULE_DIR$/vendor/behat/mink-zombie-driver" />
           <root url="file://$MODULE_DIR$/vendor/yiiext/nested-set-behavior" />
           <root url="file://$MODULE_DIR$/vendor/monolog/monolog" />
           <root url="file://$MODULE_DIR$/vendor/guzzle/stream" />
@@ -155,7 +144,6 @@
           <root url="file://$MODULE_DIR$/vendor/behat/mink-browserkit-driver" />
           <root url="file://$MODULE_DIR$/vendor/behat/mink-goutte-driver" />
           <root url="file://$MODULE_DIR$/vendor/guzzle/http" />
-          <root url="file://$MODULE_DIR$/vendor/alexandresalome/php-selenium" />
           <root url="file://$MODULE_DIR$/vendor/yiisoft/yii" />
           <root url="file://$MODULE_DIR$/vendor/symfony/process" />
           <root url="file://$MODULE_DIR$/vendor/guzzle/parser" />
@@ -176,11 +164,8 @@
           <root url="file://$MODULE_DIR$/vendor/yiiext/imperavi-redactor-widget" />
           <root url="file://$MODULE_DIR$/vendor/symfony/browser-kit" />
           <root url="file://$MODULE_DIR$/vendor/fabpot/goutte" />
-          <root url="file://$MODULE_DIR$/vendor/videlalvaro/php-amqplib" />
-          <root url="file://$MODULE_DIR$/vendor/facebook/php-sdk" />
           <root url="file://$MODULE_DIR$/vendor/zhuravljov/yii2-debug" />
           <root url="file://$MODULE_DIR$/vendor/phpunit/php-timer" />
-          <root url="file://$MODULE_DIR$/vendor/behat/mink-selenium-driver" />
         </SOURCES>
       </library>
     </orderEntry>

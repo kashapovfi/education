@@ -10,7 +10,7 @@
 
 Yii::import('application.modules.blog.models.*');
 
-class ActivePlanWidget extends YWidget
+class ActivePlanWidget extends yupe\widgets\YWidget
 {
     public $userId;
     public $view = 'activeplan';

@@ -27,7 +27,7 @@ class SiteController extends yupe\components\controllers\FrontController
      */
     public function actionIndex()
     {
-        $this->render('welcome');
+        $this->render('index');
     }
 
     /**
