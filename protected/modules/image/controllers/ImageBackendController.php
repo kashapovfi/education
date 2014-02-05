@@ -11,6 +11,17 @@
  **/
 class ImageBackendController extends yupe\components\controllers\BackController
 {
+    
+    public function actions()
+    {
+        return array(
+            'AjaxFileUpload' => 'yupe\components\actions\YAjaxFileUploadAction',
+            'AjaxImageUpload' => 'yupe\components\actions\YAjaxImageUploadAction',
+            'AjaxImageChoose' => 'yupe\components\actions\YAjaxImageChooseAction'
+        );
+    }
+
+
     /**
      * Отображает изображение по указанному идентификатору
      * 
@@ -52,7 +63,7 @@ class ImageBackendController extends yupe\components\controllers\BackController
                     $transaction->commit();
 
                     Yii::app()->user->setFlash(
-                        YFlashMessages::SUCCESS_MESSAGE,
+                        yupe\widgets\YFlashMessages::SUCCESS_MESSAGE,
                         Yii::t('ImageModule.image', 'Image created!')
                     );
 
@@ -66,7 +77,7 @@ class ImageBackendController extends yupe\components\controllers\BackController
                 $transaction->rollback();
 
                 Yii::app()->user->setFlash(
-                    YFlashMessages::ERROR_MESSAGE,
+                    yupe\widgets\YFlashMessages::ERROR_MESSAGE,
                     $e->getMessage()
                 );
             }
@@ -93,7 +104,7 @@ class ImageBackendController extends yupe\components\controllers\BackController
             if ($model->save()) {
                 
                 Yii::app()->user->setFlash(
-                    YFlashMessages::SUCCESS_MESSAGE,
+                    yupe\widgets\YFlashMessages::SUCCESS_MESSAGE,
                     Yii::t('ImageModule.image', 'Image updated!')
                 );
 
@@ -126,7 +137,7 @@ class ImageBackendController extends yupe\components\controllers\BackController
             $this->loadModel($id)->delete();
 
             Yii::app()->user->setFlash(
-                YFlashMessages::SUCCESS_MESSAGE,
+                yupe\widgets\YFlashMessages::SUCCESS_MESSAGE,
                 Yii::t('ImageModule.image', 'Image removed!')
             );
 

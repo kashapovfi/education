@@ -21,8 +21,7 @@ class PageController extends yupe\components\controllers\FrontController
      * экшн для отображения конкретной страницы, отображает опубликованные страницы и превью
      */
     public function actionShow($slug)
-    {
-        $this->layout = '//layouts/page-default';
+    {        
         $page = null;
         // превью
         $page = ((int) Yii::app()->getRequest()->getQuery('preview') === 1 && Yii::app()->user->isSuperUser())
@@ -36,7 +35,7 @@ class PageController extends yupe\components\controllers\FrontController
                 ':deflang' => Yii::app()->getModule('yupe')->defaultLanguage,
             ));
 
-        if (!$page) {
+        if (null === $page) {
             throw new CHttpException('404', Yii::t('PageModule.page', 'Page was not found'));
         }
 
@@ -44,11 +43,13 @@ class PageController extends yupe\components\controllers\FrontController
         if ($page->is_protected == Page::PROTECTED_YES && !Yii::app()->user->isAuthenticated())
         {
             Yii::app()->user->setFlash(
-                YFlashMessages::ERROR_MESSAGE,
+                yupe\widgets\YFlashMessages::ERROR_MESSAGE,
                 Yii::t('PageModule.page', 'You must be authorized user for view this page!')
             );
+
             $this->redirect(array(Yii::app()->getModule('user')->accountActivationSuccess));
         }
+
         $this->currentPage = $page;
 
         $this->render('page', array('page' => $page));

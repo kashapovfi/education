@@ -49,7 +49,7 @@ class CommentController extends yupe\components\controllers\FrontController
     {
         return array(
             'captcha' => array(
-                'class'     => 'application.modules.yupe.components.actions.YCaptchaAction',
+                'class'     => 'yupe\components\actions\YCaptchaAction',
                 'backColor' => 0xFFFFFF,
                 'testLimit' => 1
             ),
@@ -67,15 +67,18 @@ class CommentController extends yupe\components\controllers\FrontController
             throw new CHttpException(404);
         }
 
-        $redirect = Yii::app()->getRequest()->getPost('redirectTo', Yii::app()->user->returnUrl);
+        $module = Yii::app()->getModule('comment');
+
+        if(!$module->allowGuestComment && !Yii::app()->user->isAuthenticated()) {
+            throw new CHttpException(404);
+        }      
 
         $comment = new Comment;
 
         $comment->setAttributes(
             Yii::app()->getRequest()->getPost('Comment')
         );
-
-        $module = Yii::app()->getModule('comment');
+       
         $comment->status = (int)$module->defaultCommentStatus;
 
         if (Yii::app()->user->isAuthenticated()) {
@@ -95,7 +98,7 @@ class CommentController extends yupe\components\controllers\FrontController
         $saveStatus = false;
         $parentId = $comment->getAttribute('parent_id');
         $message = Yii::t('CommentModule.comment', 'Record was not added! Fill form correct!');
-        $antiSpamTime  = $this->module->antispamInterval;
+        $antiSpamTime = $module->antispamInterval;
 
         $itIsSpamMessage = Comment::isItSpam(
             $comment,
@@ -106,8 +109,8 @@ class CommentController extends yupe\components\controllers\FrontController
         if($itIsSpamMessage) {
             $message = Yii::t(
                 'CommentModule.comment',
-                'Spam protection, try to create comment after {few} minutes!',
-                array('{few}' => round($antiSpamTime / 60, 1))
+                'Spam protection, try to create comment after {few} seconds!',
+                array('{few}' => $antiSpamTime)
             );
         }else{
 
@@ -124,7 +127,7 @@ class CommentController extends yupe\components\controllers\FrontController
                     $comment->getAttribute("model_id"));
 
                 // Добавляем комментарий к корню.
-                if ($rootNode!==false && $rootNode->id > 0)
+                if ($rootNode !== false && $rootNode->id > 0)
                 {
                     $saveStatus = $comment->appendTo($rootNode);
                 }
@@ -132,6 +135,8 @@ class CommentController extends yupe\components\controllers\FrontController
         }
 
         if ($saveStatus) {
+
+            $redirect = Yii::app()->getRequest()->getPost('redirectTo', Yii::app()->user->returnUrl);
 
             // сбросить кэш
             Yii::app()->cache->delete("Comment{$comment->model}{$comment->model_id}");
@@ -157,7 +162,7 @@ class CommentController extends yupe\components\controllers\FrontController
             }
 
             Yii::app()->user->setFlash(
-                YFlashMessages::SUCCESS_MESSAGE,
+                yupe\widgets\YFlashMessages::SUCCESS_MESSAGE,
                 $message
             );
 
@@ -168,14 +173,15 @@ class CommentController extends yupe\components\controllers\FrontController
             if (Yii::app()->getRequest()->getIsAjaxRequest()) {
                 Yii::app()->ajax->failure(
                     array(
-                        'message' => $message
+                        'message' => $message                        
                     )
                 );
             }
 
             Yii::app()->user->setFlash(
-                YFlashMessages::ERROR_MESSAGE, $message
+                yupe\widgets\YFlashMessages::ERROR_MESSAGE, $message
             );
+            
             $this->redirect($redirect);
         }
     }
@@ -187,22 +193,10 @@ class CommentController extends yupe\components\controllers\FrontController
      *
      * @return string html отрисованного комментария
      **/
-    private function _renderComment(Comment $comment = null)
+    private function _renderComment(Comment $comment)
     {
-        if ($comment === null) {
-            return null;
-        }
-
-        ob_start();
-
         $comment->refresh();
 
-        $this->widget(
-            'application.modules.comment.widgets.CommentsListWidget', array(
-                'comment' => $comment
-            )
-        );
-
-        return ob_get_clean();
+        return $this->renderPartial('_comment', array('comment' => $comment, 'level' => $comment->getLevel()), true);
     }
 }

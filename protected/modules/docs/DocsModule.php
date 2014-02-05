@@ -196,7 +196,7 @@ class DocsModule extends yupe\components\WebModule
      */
     public function getVersion()
     {
-        return Yii::t('DocsModule.docs', '0.2');
+        return Yii::t('DocsModule.docs', '0.6');
     }
 
     /**
@@ -265,6 +265,11 @@ class DocsModule extends yupe\components\WebModule
                 'icon'  => 'info-sign',
                 'items' => array(
                     array(
+                        'label' => Yii::t('DocsModule.docs', 'Install'),
+                        'url'   => array('/docs/show/index', 'file' => 'install', 'moduleID' => 'yupe'),
+                        'icon'  => 'file',
+                    ),
+                    array(
                         'label' => Yii::t('DocsModule.docs', 'Abilities'),
                         'url'   => array('/docs/show/index', 'file' => 'capability', 'moduleID' => 'yupe'),
                         'icon'  => 'file',
@@ -285,6 +290,11 @@ class DocsModule extends yupe\components\WebModule
                 'label' => Yii::t('DocsModule.docs', 'For developers'),
                 'icon'  => 'th-large',
                 'items' => array(
+                    array(
+                        'label' => Yii::t('DocsModule.docs','Creating module'),
+                        'url'   => array('/docs/show/index', 'file' => 'module.create'),
+                        'icon'  => 'file'
+                    ),
                     array(
                         'label' => Yii::t('DocsModule.docs', 'Set testing environment'),
                         'url'   => array('/docs/show/index', 'file' => 'testing'),
@@ -341,12 +351,7 @@ class DocsModule extends yupe\components\WebModule
                         'label' => Yii::t('DocsModule.docs', 'RSS feed generation'),
                         'url'   => array('/docs/show/index', 'file' => 'atomfeed', 'moduleID' => 'yupe'),
                         'icon'  => 'file',
-                    ),
-                    array(
-                        'label' => Yii::t('DocsModule.docs', 'Curl wrapper'),
-                        'url'   => array('/docs/show/index', 'file' => 'curl.wrapper', 'moduleID' => 'yupe'),
-                        'icon'  => 'file',
-                    ),
+                    ),                 
                     array(
                         'label' => Yii::t('DocsModule.docs', 'Migrator'),
                         'url'   => array('/docs/show/index', 'file' => 'migrator.index', 'moduleID' => 'yupe'),

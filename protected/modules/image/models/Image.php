@@ -28,7 +28,7 @@
  * The followings are the available model relations:
  * @property User $user
  */
-class Image extends YModel
+class Image extends yupe\models\YModel
 {
     const STATUS_CHECKED    = 1;
     const STATUS_NEED_CHECK = 0;
@@ -89,7 +89,7 @@ class Image extends YModel
         $module = Yii::app()->getModule('image');
         return array(
             'imageUpload' => array(
-                'class'         =>'application.modules.yupe.components.behaviors.ImageUploadBehavior',
+                'class'         =>'yupe\components\behaviors\ImageUploadBehavior',
                 'scenarios'     => array('insert','update'),
                 'attributeName' => 'file',
                 'minSize'       => $module->minSize,
@@ -276,8 +276,9 @@ class Image extends YModel
      */
     public function getUrl($width = 0, $height = 0)
     {
-        if ($this->_url)
+        if ($this->_url) {
             return $this->_url.'/'.$this->file;
+        }
 
         $yupe = Yii::app()->getModule('yupe');
         $image = Yii::app()->getModule('image');
@@ -289,6 +290,15 @@ class Image extends YModel
                 ? $thumbnail
                 : $this->file
         );
+    }
+
+    public function getRawUrl()
+    {
+        $yupe = Yii::app()->getModule('yupe');
+
+        $image = Yii::app()->getModule('image');
+
+        return Yii::app()->createAbsoluteUrl('/').'/' . $yupe->uploadPath . '/' . $image->uploadPath . '/' . $this->file;      
     }
 
     /**
@@ -366,15 +376,17 @@ class Image extends YModel
      **/
     public function setGalleryId($value = null)
     {
-        if ($this->scenario === 'search' || !Yii::app()->hasModule('gallery'))
+        if ($this->scenario === 'search' || !Yii::app()->hasModule('gallery')){
             return ($this->_galleryId = $value);
+        }
 
         if ($this->gallery instanceof Gallery) {
             $this->galleryRell->delete();
         }
 
-        if (($gallery = Gallery::model()->loadModel($value)) === null)
+        if (($gallery = Gallery::model()->loadModel($value)) === null){
             return $value;
+        }
 
         return $gallery->addImage($this);
     }

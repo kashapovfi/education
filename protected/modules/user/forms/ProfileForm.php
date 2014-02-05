@@ -43,7 +43,7 @@ class ProfileForm extends CFormModel
             array('about', 'length', 'max' => 300),
             array('location', 'length', 'max' => 150),            
             array('password, cPassword', 'length', 'min' => $module->minPasswordLength),
-//            array('nick_name', 'match', 'pattern' => '/^[A-Za-z0-9]{2,50}$/', 'message' => Yii::t('UserModule.user','Bad field format for "{attribute}". You can use only letters and digits from 2 to 20 symbols')),
+            array('nick_name', 'match', 'pattern' => '/^[A-Za-z0-9]{2,50}$/', 'message' => Yii::t('UserModule.user','Bad field format for "{attribute}". You can use only letters and digits from 2 to 20 symbols')),
             array('nick_name', 'checkNickName'),
             array('cPassword', 'compare', 'compareAttribute' => 'password', 'message' => Yii::t('UserModule.user', 'Password is not coincide')),
             array('email', 'email'),

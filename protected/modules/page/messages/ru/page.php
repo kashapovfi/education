@@ -17,6 +17,7 @@
  * NOTE, this file must be saved in UTF-8 encoding.
  */
 return array (
+  'Layout' => 'Шаблон',
   '*unknown*' => '*неизвестно*',
   '- no matter -' => '- не важно -',
   '- not set -' => '- не выбрана -',
@@ -89,7 +90,7 @@ return array (
   'Created by' => 'Создал',
   'Created at' => 'Создано',
   'Sorting' => 'Сортировка',
-  'Save page nad close' => 'Сохранить страницу и закрыть',
+  'Save page and close' => 'Сохранить страницу и закрыть',
   'Save page and continue' => 'Сохранить страницу и продолжить',
   'List' => 'Список',
   'Pages list' => 'Список страниц',

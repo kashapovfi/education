@@ -32,9 +32,10 @@
  * @property integer $user_id
  * @property integer $change_user_id
  * @property integer $order
+ * @property string  $layout
  */
 
-class Page extends YModel
+class Page extends yupe\models\YModel
 {
 
     const STATUS_DRAFT      = 0;
@@ -75,13 +76,13 @@ class Page extends YModel
             array('lang', 'length', 'max' => 2),
             array('lang', 'default', 'value' => Yii::app()->sourceLanguage),
             array('category_id', 'default', 'setOnEmpty' => true, 'value' => null),
-            array('title, title_short, slug, keywords, description', 'length', 'max' => 150),
-            array('slug', 'YUniqueSlugValidator'),
+            array('title, title_short, slug, keywords, description, layout', 'length', 'max' => 150),
+            array('slug', 'yupe\components\validators\YUniqueSlugValidator'),
             array('status', 'in', 'range' => array_keys($this->getStatusList())),
             array('is_protected', 'in', 'range' => array_keys($this->getProtectedStatusList())),
             array('title, title_short, slug, body, description, keywords', 'filter', 'filter' => 'trim'),
             array('title, title_short, slug, description, keywords', 'filter', 'filter' => array($obj = new CHtmlPurifier(), 'purify')),
-            array('slug', 'YSLugValidator'),
+            array('slug', 'yupe\components\validators\YSLugValidator'),
             array('lang', 'match', 'pattern' => '/^[a-z]{2}$/', 'message' => Yii::t('PageModule.page', 'Bad characters in {attribute} field')),
             array('lang, id, parent_id, creation_date, change_date, title, title_short, slug, body, keywords, description, status, order, lang', 'safe', 'on' => 'search'),
         );
@@ -124,6 +125,7 @@ class Page extends YModel
             'user_id'        => Yii::t('PageModule.page', 'Created by'),
             'change_user_id' => Yii::t('PageModule.page', 'Changed by'),
             'order'          => Yii::t('PageModule.page', 'Sorting'),
+            'layout'         => Yii::t('PageModule.page', 'Layout')
         );
     }
 
@@ -150,13 +152,14 @@ class Page extends YModel
             'user_id'        => Yii::t('PageModule.page', 'Page creator'),
             'change_user_id' => Yii::t('PageModule.page', 'Page editor'),
             'order'          => Yii::t('PageModule.page', 'Page priority in widgets and menu.'),
+            'layout'         => Yii::t('PageModule.page', 'Page layout')
         );
     }
 
     public function beforeValidate()
     {
         if (!$this->slug)
-            $this->slug = YText::translit($this->title);
+            $this->slug = yupe\helpers\YText::translit($this->title);
         if (!$this->lang)
             $this->lang = Yii::app()->language;
         return parent::beforeValidate();
@@ -222,6 +225,7 @@ class Page extends YModel
         $criteria->compare('t.status', $this->status);
         $criteria->compare('category_id', $this->category_id);
         $criteria->compare('is_protected', $this->is_protected);
+        $criteria->compare('layout', $this->layout);
 
         return new CActiveDataProvider(get_class($this), array(
             'criteria' => $criteria,

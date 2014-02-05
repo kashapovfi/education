@@ -48,12 +48,12 @@ class ImageModule extends WebModule
 
     public  function getVersion()
     {
-        return Yii::t('ImageModule.image', '0.4');
+        return Yii::t('ImageModule.image', '0.6');
     }
 
     public function getIcon()
     {
-        return "picture";
+        return "picture-o";
     }
 
     public function getParamsLabels()

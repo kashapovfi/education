@@ -5,12 +5,25 @@
  *
 */
 
+namespace yupe\components\behaviors;
+
+use CActiveRecordBehavior;
+use CValidator;
+use CUploadedFile;
+use Yii;
+use yupe\helpers\YFile;
+
 class ImageUploadBehavior extends CActiveRecordBehavior
 {
     /*
      * Атрибут модели для хранения изображения
      */
     public $attributeName = 'image';
+
+    /*
+     * Атрибут для замены имени поля file если необходимо
+     */
+    public $fileInstanceName = '';
 
     /*
      * Загружаемое изображение
@@ -87,7 +100,13 @@ class ImageUploadBehavior extends CActiveRecordBehavior
 
     public function beforeValidate($event)
     {
-        if ($this->checkScenario() && ($this->_newImage = CUploadedFile::getInstance($this->owner, $this->attributeName))) {
+        if(empty($this->fileInstanceName)){
+            $this->_newImage = CUploadedFile::getInstance($this->owner, $this->attributeName);
+        }else{
+            $this->_newImage = CUploadedFile::getInstanceByName($this->fileInstanceName);
+        }
+
+        if ($this->checkScenario() && $this->_newImage ) {
             $this->owner->{$this->attributeName} = $this->_newImage;
         }
     }
@@ -112,8 +131,11 @@ class ImageUploadBehavior extends CActiveRecordBehavior
         if ($this->owner->scenario !== 'altlang' && @is_file($this->_oldImage)) {
             // Удаляем связанные с данным изображением превьюшки:
             $fileName = pathinfo($this->_oldImage, PATHINFO_BASENAME);
-            foreach (glob($this->uploadPath . 'thumb_cache_*_' . $fileName) as $file)
+
+            foreach (glob($this->uploadPath . 'thumb_cache_*_' . $fileName) as $file){
                 @unlink($file);
+            }
+
             @unlink($this->_oldImage);
         }
     }
@@ -155,5 +177,10 @@ class ImageUploadBehavior extends CActiveRecordBehavior
 
 	    if ($image->save($newFile))
 		    $this->owner->{$this->attributeName} = pathinfo($newFile, PATHINFO_BASENAME);
+    }
+
+    public function addFileInstanceName($name)
+    {
+        $this->fileInstanceName = $name;
     }
 }

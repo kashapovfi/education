@@ -37,7 +37,7 @@
  * @property User $updateUser
  * @property Post[] $posts
  */
-class Blog extends YModel
+class Blog extends yupe\models\YModel
 {
     const STATUS_BLOCKED = 0;
     const STATUS_ACTIVE  = 1;
@@ -78,7 +78,7 @@ class Blog extends YModel
             array('slug', 'length', 'max' => 150),
             array('lang', 'length', 'max' => 2),
             array('create_user_id, update_user_id, create_date, update_date, status', 'length', 'max' => 11),
-            array('slug', 'YSLugValidator', 'message' => Yii::t('BlogModule.blog', 'Illegal characters in {attribute}')),
+            array('slug', 'yupe\components\validators\YSLugValidator', 'message' => Yii::t('BlogModule.blog', 'Illegal characters in {attribute}')),
             array('type', 'in', 'range' => array_keys($this->typeList)),
             array('status', 'in', 'range' => array_keys($this->statusList)),
             array('name, slug, description', 'filter', 'filter' => array($obj = new CHtmlPurifier(), 'purify')),
@@ -218,7 +218,7 @@ class Blog extends YModel
         $module = Yii::app()->getModule('blog');
         return array(
             'imageUpload' => array(
-                'class'         =>'application.modules.yupe.components.behaviors.ImageUploadBehavior',
+                'class'         =>'yupe\components\behaviors\ImageUploadBehavior',
                 'scenarios'     => array('insert','update'),
                 'attributeName' => 'icon',
                 'minSize'       => $module->minSize,
@@ -364,5 +364,20 @@ class Blog extends YModel
             $icon = Yii::app()->getAssetManager()->publish($iconPath);
         }
         return $icon;
+    }
+
+    public function getPosts()
+    {
+        $posts = new Post('search');
+        $posts->unsetAttributes();
+        $posts->blog_id = $this->id;
+        $posts->status  = Post::STATUS_PUBLISHED;
+        $posts->access_type = Post::ACCESS_PUBLIC;
+        return $posts;
+    }
+
+    public function getList()
+    {
+        return Blog::model()->published()->findAll(array('order' => 'name ASC'));        
     }
 }

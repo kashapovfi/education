@@ -13,7 +13,7 @@
 
 Yii::import('application.modules.blog.models.Blog'); 
  
-class BlogsWidget extends YWidget
+class BlogsWidget extends yupe\widgets\YWidget
 {
     public $view = 'blogswidget';
 
@@ -21,9 +21,9 @@ class BlogsWidget extends YWidget
     { 
         $models = Blog::model()->public()->published()->cache($this->cacheTime)->with('membersCount','postsCount')->cache($this->cacheTime)->findAll(array(
         	'join'   => 'JOIN {{blog_user_to_blog}} utb ON utb.blog_id = t.id', 
-        	'select' => 't.name, t.slug, utb.id',        	
+        	'select' => 't.name, t.slug',        	
         	'order'  => 'count(utb.id) DESC',
-        	'group'  => 't.slug',
+        	'group'  => 't.slug, t.name, t.id',
         	'limit'  => $this->limit,
         ));
 

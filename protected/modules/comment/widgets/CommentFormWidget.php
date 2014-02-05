@@ -10,17 +10,18 @@
  * @link     http://yupe.ru
  *
  **/
-class CommentFormWidget extends YWidget
+class CommentFormWidget extends yupe\widgets\YWidget
 {
     public $model;
     public $modelId;
     public $redirectTo;
     public $view = 'commentformwidget';
+    public $allowGuestComment = false;
 
     public function init()
     {
         Yii::app()->clientScript->registerScriptFile(
-            Yii::app()->assetManager->publish(Yii::app()->theme->basePath . '/web/js/commentform.js')
+            Yii::app()->assetManager->publish(Yii::app()->theme->basePath . '/web/js/comments.js')
         );
         $this->model   = is_object($this->model) ? get_class($this->model) : $this->model;
         $this->modelId = (int) $this->modelId;
@@ -37,10 +38,14 @@ class CommentFormWidget extends YWidget
             'model_id' => $this->modelId,
         ));
 
+        if($this->allowGuestComment == false && !Yii::app()->user->isAuthenticated()) {
+            $this->view = 'commentnotallowed';
+        }
+
         $this->render($this->view, array(
             'redirectTo' => $this->redirectTo,
             'model'      => $model,
-            'module'      => $module,
+            'module'     => $module,
         ));
     }
 }

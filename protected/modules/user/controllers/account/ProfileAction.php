@@ -16,12 +16,11 @@ class ProfileAction extends CAction
     {
         if (Yii::app()->user->isAuthenticated() === false) {
             $this->controller->redirect(Yii::app()->user->loginUrl);
-        }
-        
+        }        
 
         if (($user = Yii::app()->user->getProfile()) === null) {
             Yii::app()->user->setFlash(
-                YFlashMessages::ERROR_MESSAGE,
+                yupe\widgets\YFlashMessages::ERROR_MESSAGE,
                 Yii::t('UserModule.user', 'User not found.')
             );
 
@@ -104,17 +103,18 @@ class ProfileAction extends CAction
                         );
 
                         Yii::app()->user->setFlash(
-                            YFlashMessages::SUCCESS_MESSAGE,
+                            yupe\widgets\YFlashMessages::SUCCESS_MESSAGE,
                             Yii::t('UserModule.user', 'Your profile was changed successfully')
                         );
 
-                        //Обновляем аватарку                    
-                        if ($uploadedFile = CUploadedFile::getInstance($form, 'avatar')) {
+                        if($form->use_gravatar) {
+                            $user->avatar = null;
+                        }elseif(($uploadedFile = CUploadedFile::getInstance($form, 'avatar')) !== null){                                                        
                             $user->changeAvatar($uploadedFile);
                         }
 
                         // Сохраняем профиль
-                        $user->save(false);
+                        $user->save();
 
                         // И дополнительные профили, если они есть
                         if (is_array($this->controller->module->profiles)) {
@@ -124,9 +124,10 @@ class ProfileAction extends CAction
                         }
 
                         Yii::app()->user->setFlash(
-                            YFlashMessages::SUCCESS_MESSAGE,
+                            yupe\widgets\YFlashMessages::SUCCESS_MESSAGE,
                             Yii::t('UserModule.user', 'Profile was updated')
                         );
+
 
                         $transaction->commit();
 
@@ -135,7 +136,7 @@ class ProfileAction extends CAction
 
                             if(Yii::app()->userManager->changeUserEmail($user, $form->email)) {
                                 Yii::app()->user->setFlash(
-                                    YFlashMessages::SUCCESS_MESSAGE,
+                                    yupe\widgets\YFlashMessages::SUCCESS_MESSAGE,
                                     Yii::t(
                                         'UserModule.user',
                                         'You need to confirm your e-mail. Please check the mail!'
@@ -161,7 +162,7 @@ class ProfileAction extends CAction
                 $transaction->rollback();
 
                 Yii::app()->user->setFlash(
-                    YFlashMessages::ERROR_MESSAGE,
+                    yupe\widgets\YFlashMessages::ERROR_MESSAGE,
                     $e->getMessage()
                 );
             }

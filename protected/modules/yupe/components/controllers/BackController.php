@@ -14,7 +14,7 @@
 namespace yupe\components\controllers;
 
 use Yii;
-use YFlashMessages;
+use yupe\widgets\YFlashMessages;
 use CHttpException;
 use CActiveRecord;
 use CDbCriteria;
@@ -31,14 +31,14 @@ class BackController extends Controller
     public function filters()
     {
         return array(
-            array('application.modules.yupe.filters.YBackAccessControl'),
+            array('yupe\filters\YBackAccessControl'),
         );
     }
 
     public function init()
     {
         parent::init();
-        //$this->yupe->getComponent('bootstrap');
+        $this->yupe->getComponent('bootstrap');
         $this->layout = $this->yupe->getBackendLayoutAlias();
         $backendTheme = $this->yupe->backendTheme;
         $this->setPageTitle(Yii::t('YupeModule.yupe', 'Yupe control panel!'));

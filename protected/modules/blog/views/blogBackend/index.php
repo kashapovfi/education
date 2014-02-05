@@ -109,12 +109,7 @@ $this->renderPartial('_search', array('model' => $model));
                 'type'   => 'raw',
                 'value'  => 'CHtml::image($data->getImageUrl(), $data->name, array("width"  => 64, "height" => 64))',
                 'filter' => false
-            ),
-            array(
-                'name'  => 'id',
-                'type'  => 'raw',
-                'value' => 'CHtml::link($data->id, array("/blog/blogBackend/update", "id" => $data->id))',
-            ),
+            ),         
             array(
                 'name'  => 'name',
                 'type'  => 'raw',
@@ -134,7 +129,7 @@ $this->renderPartial('_search', array('model' => $model));
             array(
                 'name'  => 'category_id',
                 'value'  => 'empty($data->category) ? "---" : $data->category->name',
-                'filter' => Category::model()->getFormattedList((int)Yii::app()->getModule('blog')->mainCategory)
+				'filter' => CHtml::activeDropDownList($model, 'category_id', Category::model()->getFormattedList(Yii::app()->getModule('blog')->mainCategory), array('encode' => false, 'empty' => ''))
             ),
             array(
                 'name'   => 'create_user_id',

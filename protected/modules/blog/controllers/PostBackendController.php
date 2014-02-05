@@ -11,6 +11,17 @@
  */
 class PostBackendController extends yupe\components\controllers\BackController
 {
+    public function actions()
+    {
+        return array(
+            'inline' => array(
+                'class' => 'yupe\components\actions\YInLineEditAction',
+                'model' => 'Post',
+                'validAttributes' => array('title', 'slug', 'publish_date')
+            )
+        );
+    }
+
     /**
      * Отображает запись по указанному идентификатору
      * 
@@ -36,8 +47,8 @@ class PostBackendController extends yupe\components\controllers\BackController
     public function actionCreate()
     {
         $model = new Post;
-        $model->publish_date_tmp = date('d-m-Y');
-        $model->publish_time_tmp = date('h:i');
+
+        $model->publish_date = date('d-m-Y h:i');
 
         if (Yii::app()->getRequest()->getIsPostRequest() && Yii::app()->getRequest()->getPost('Post')) {
             $model->setAttributes(
@@ -49,7 +60,7 @@ class PostBackendController extends yupe\components\controllers\BackController
 
             if ($model->save()) {
                 Yii::app()->user->setFlash(
-                    YFlashMessages::SUCCESS_MESSAGE,
+                    yupe\widgets\YFlashMessages::SUCCESS_MESSAGE,
                     Yii::t('BlogModule.blog', 'Post was created!')
                 );
                 $this->redirect(
@@ -85,7 +96,7 @@ class PostBackendController extends yupe\components\controllers\BackController
 
             if ($model->save()) {
                 Yii::app()->user->setFlash(
-                    YFlashMessages::SUCCESS_MESSAGE,
+                    yupe\widgets\YFlashMessages::SUCCESS_MESSAGE,
                     Yii::t('BlogModule.blog', 'Post was updated!')
                 );
 
@@ -122,7 +133,7 @@ class PostBackendController extends yupe\components\controllers\BackController
                 $post->delete();
 
             Yii::app()->user->setFlash(
-                YFlashMessages::SUCCESS_MESSAGE,
+                yupe\widgets\YFlashMessages::SUCCESS_MESSAGE,
                 Yii::t('BlogModule.blog', 'Post was removed!')
             );
 
@@ -144,8 +155,9 @@ class PostBackendController extends yupe\components\controllers\BackController
      */
     public function actionIndex()
     {
-        $model = new Post('search');
+        $model = new Post('search');        
         $model->unsetAttributes(); // clear any default values
+        $model->comment_status = true;
         if (Yii::app()->getRequest()->getParam('Post'))
             $model->setAttributes(
                 Yii::app()->getRequest()->getParam('Post')

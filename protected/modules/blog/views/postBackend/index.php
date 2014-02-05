@@ -83,22 +83,62 @@ $this->renderPartial('_search', array('model' => $model));
                 'name' => 'id'
             ),
         ),
-        'columns' => array(
+        'columns' => array( 
             array(
                 'name'  => 'id',
-                'type'  => 'raw',
-                'value' => 'CHtml::link($data->id, array("/blog/postBackend/update", "id" => $data->id))',
-            ),
-            array(
-                'name'  => 'title',
-                'type'  => 'raw',
-                'value' => 'CHtml::link($data->title, array("/blog/postBackend/update", "id" => $data->id))',
+                'value' => 'CHtml::link($data->id, array("/blog/postBackend/update","id" => $data->id))',
+                'type'  => 'html',
+                'htmlOptions' => array(
+                    'style' => 'width:10px;'
+                )
             ),
             array(
                 'name'   => 'blog_id',
                 'type'   => 'raw',
                 'value'  => 'CHtml::link($data->blog->name, array("/blog/blogBackend/view", "id" => $data->blog->id))',
                 'filter' => CHtml::listData(Blog::model()->findAll(),'id','name')
+            ),
+            array(
+                'class' => 'bootstrap.widgets.TbEditableColumn',                
+                'name'  => 'title',               
+                'editable' => array(   
+                    'url' => $this->createUrl('/blog/postBackend/inline'),                 
+                    'mode' => 'inline',
+                    'params' => array(
+                        Yii::app()->request->csrfTokenName => Yii::app()->request->csrfToken
+                    )                    
+                )                
+            ),
+            array(
+                'class' => 'bootstrap.widgets.TbEditableColumn',                
+                'name'  => 'slug',
+                'editable' => array(   
+                    'url'  => $this->createUrl('/blog/postBackend/inline'),
+                    'mode' => 'inline',
+                    'params' => array(
+                        Yii::app()->request->csrfTokenName => Yii::app()->request->csrfToken
+                    )                                 
+                )                           
+            ),
+            array(
+                'class' => 'bootstrap.widgets.TbEditableColumn',                
+                'name'  => 'publish_date',
+                'editable' => array(   
+                    'url'  => $this->createUrl('/blog/postBackend/inline'),
+                    'mode' => 'inline',
+                    'type' => 'datetime',
+                    'options' => array(
+                        'datetimepicker' => array(
+                           'format' => 'dd-mm-yyyy hh:ii'
+                        ),
+                        'datepicker' => array(
+                            'format' => 'dd-mm-yyyy hh:ii'
+                        ),
+                    ),
+                    'params' => array(
+                        Yii::app()->request->csrfTokenName => Yii::app()->request->csrfToken
+                    )                                 
+                )                           
             ),
             array(
                 'name'   => 'category_id',
@@ -110,16 +150,6 @@ $this->renderPartial('_search', array('model' => $model));
                 'type'   => 'raw',
                 'value'  => 'CHtml::link($data->createUser->getFullName(), array("/user/userBackend/view", "id" => $data->createUser->id))',
                 'filter' => CHtml::listData(User::model()->cache($this->yupe->coreCacheTime)->findAll(),'id','nick_name')
-            ),
-            array(
-                'name'  => 'publish_date',
-                'value' => 'Yii::app()->getDateFormatter()->formatDateTime($data->publish_date, "short", "short")',
-            ),
-            array(
-                'name'  => 'access_type',
-                'type'  => 'raw',
-                'value' => '$this->grid->returnBootstrapStatusHtml($data, "access_type", "AccessType", array(1 => "globe", 2 => "home"))',
-                'filter' => Post::model()->getAccessTypeList()
             ),
             array(
                 'name'  => 'status',

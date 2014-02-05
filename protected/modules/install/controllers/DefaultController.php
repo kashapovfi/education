@@ -10,6 +10,8 @@
  * @link     http://yupe.ru
  **/
 
+use yupe\models\Settings;
+
 class DefaultController extends yupe\components\controllers\BackController
 {
     /**
@@ -309,9 +311,9 @@ class DefaultController extends yupe\components\controllers\BackController
             array(
                 Yii::t('InstallModule.install', 'РНР version'),
                 true,
-                version_compare(PHP_VERSION, "5.3.7", ">="),
+                version_compare(PHP_VERSION, "5.3.3", ">="),
                 '<a href="http://www.yiiframework.com">Yii Framework</a>',
-                Yii::t('InstallModule.install', 'Need PHP version 5.3 and above.'),
+                Yii::t('InstallModule.install', 'Need PHP version 5.3.3 and above.'),
             ),
             array(
                 Yii::t('InstallModule.install', 'Расширение json'),
@@ -824,7 +826,7 @@ class DefaultController extends yupe\components\controllers\BackController
     {
         $error = false;
 
-        $modules = $this->yupe->getModulesDisabled();
+        $modules = Yii::app()->moduleManager->getModulesDisabled();
         // Не выводить модуль install и yupe
         unset($modules['install']);
 
@@ -867,7 +869,7 @@ class DefaultController extends yupe\components\controllers\BackController
                     foreach ($deps as $dep) {
                         if (!isset($toInstall[$dep])) {
                             Yii::app()->user->setFlash(
-                                YFlashMessages::ERROR_MESSAGE,
+                                yupe\widgets\YFlashMessages::ERROR_MESSAGE,
                                 Yii::t(
                                     'InstallModule.install',
                                     'Module "{module}" depends on the module "{dep}", which is not activated.',
@@ -888,25 +890,24 @@ class DefaultController extends yupe\components\controllers\BackController
                 
                 Yii::app()->configManager->flushDump();
                 
-                $files = glob($this->yupe->getModulesConfig() . "*.php");
+                $files = glob(Yii::app()->moduleManager->getModulesConfig() . "*.php");
                 foreach ($files as $file) {
                     $name = pathinfo($file, PATHINFO_FILENAME);
                     if ($name == 'yupe') {
                         continue;
                     }
 
-                    $fileModule = $this->yupe->getModulesConfigDefault($name);
-                    $fileConfig = $this->yupe->getModulesConfig($name);
-                    $fileConfigBack = $this->yupe->getModulesConfigBack($name);
+                    $fileModule = Yii::app()->moduleManager->getModulesConfigDefault($name);
+                    $fileConfig = Yii::app()->moduleManager->getModulesConfig($name);
+                    $fileConfigBack = Yii::app()->moduleManager->getModulesConfigBack($name);
 
-
-                    if ($name != 'yupe' && ((!(@is_file($fileModule) && @md5_file($fileModule) == @md5_file(
+                    if ($name != \yupe\components\ModuleManager::CORE_MODULE && ((!(@is_file($fileModule) && @md5_file($fileModule) == @md5_file(
                                             $fileConfig
                                         )) && !@copy($fileConfig, $fileConfigBack)) || !@unlink($fileConfig))
                     ) {
                         $error = true;
                         Yii::app()->user->setFlash(
-                            YFlashMessages::ERROR_MESSAGE,
+                            yupe\widgets\YFlashMessages::ERROR_MESSAGE,
                             Yii::t(
                                 'InstallModule.install',
                                 'An error occurred during the installation of modules - copying the file to a folder modulesBack with error!'
@@ -967,7 +968,7 @@ class DefaultController extends yupe\components\controllers\BackController
      **/
     public function actionModuleinstall($name = null)
     {
-        $modules = $this->yupe->getModulesDisabled();
+        $modules = Yii::app()->moduleManager->getModulesDisabled();
 
         if (empty($name) || !isset($modules[$name])) {
             throw new CHttpException(404, Yii::t(
@@ -1042,6 +1043,7 @@ class DefaultController extends yupe\components\controllers\BackController
                         'hash'              => Yii::app()->userManager->hasher->hashPassword(
                             $model->userPassword
                         ),
+                        'birth_date' => null
                     )
                 );
 
@@ -1054,7 +1056,7 @@ class DefaultController extends yupe\components\controllers\BackController
                     Yii::app()->authenticationManager->login($login, Yii::app()->user, Yii::app()->request);
 
                     Yii::app()->user->setFlash(
-                        YFlashMessages::SUCCESS_MESSAGE,
+                        yupe\widgets\YFlashMessages::SUCCESS_MESSAGE,
                         Yii::t('InstallModule.install', 'The administrator has successfully created!')
                     );
 
@@ -1150,7 +1152,7 @@ class DefaultController extends yupe\components\controllers\BackController
                     $transaction->commit();
 
                     Yii::app()->user->setFlash(
-                        YFlashMessages::SUCCESS_MESSAGE,
+                        yupe\widgets\YFlashMessages::SUCCESS_MESSAGE,
                         Yii::t('InstallModule.install', 'Site settings saved successfully!')
                     );
 
@@ -1174,7 +1176,7 @@ class DefaultController extends yupe\components\controllers\BackController
                     $transaction->rollback();
 
                     Yii::app()->user->setFlash(
-                        YFlashMessages::ERROR_MESSAGE,
+                        yupe\widgets\YFlashMessages::ERROR_MESSAGE,
                         $e->__toString()
                     );
 
@@ -1208,7 +1210,7 @@ class DefaultController extends yupe\components\controllers\BackController
         try {
             Yii::app()->getModule('install')->getActivate();
             Yii::app()->user->setFlash(
-                YFlashMessages::SUCCESS_MESSAGE,
+                yupe\widgets\YFlashMessages::SUCCESS_MESSAGE,
                 Yii::t(
                     'InstallModule.install', "The module {name} is disabled!", array(
                         '{name}' => 'install',
@@ -1217,7 +1219,7 @@ class DefaultController extends yupe\components\controllers\BackController
             );
         } catch (Exception $e) {
             Yii::app()->user->setFlash(
-                YFlashMessages::ERROR_MESSAGE,
+                yupe\widgets\YFlashMessages::ERROR_MESSAGE,
                 $e->getMessage()
             );
         }

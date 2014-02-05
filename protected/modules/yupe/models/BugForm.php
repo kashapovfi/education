@@ -10,6 +10,10 @@
  * @link     http://yupe.ru
  *
  **/ 
+namespace yupe\models;
+
+use Yii;
+
 class BugForm extends YFormModel
 {
     const OTHER_MODULE = 0;
@@ -78,8 +82,9 @@ class BugForm extends YFormModel
         foreach (Yii::app()->modules as $key => $value) {
             $key = strtolower($key);
             
-            if (!Yii::app()->hasModule($key) || ($module = Yii::app()->getModule($key)) === null)
+            if (!Yii::app()->hasModule($key) || ($module = Yii::app()->getModule($key)) === null) {
                 continue;
+            }
 
             $modulesList[$key] = $module->name . ' (' . $module->version . ')';
         }
@@ -98,6 +103,4 @@ class BugForm extends YFormModel
             'team@yupe.ru' => Yii::t('YupeModule.yupe', 'Yupe development team!'),
         );
     }
-
-
 }

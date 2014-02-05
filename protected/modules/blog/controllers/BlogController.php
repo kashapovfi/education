@@ -17,7 +17,7 @@ class BlogController extends yupe\components\controllers\FrontController
      * @return void
      */
     public function actionIndex()
-    {
+    {       
         $blogs = new Blog('search');
         $blogs->unsetAttributes();
         $blogs->status = Blog::STATUS_ACTIVE;
@@ -39,7 +39,7 @@ class BlogController extends yupe\components\controllers\FrontController
      * @return void
      */
     public function actionShow($slug = null)
-    {
+    {     
         $blog = Blog::model()->with('posts', 'members', 'createUser')->getByUrl($slug)->published()->find();
 
         if ($blog === null){
@@ -64,31 +64,35 @@ class BlogController extends yupe\components\controllers\FrontController
                 Yii::app()->ajax->failure(Yii::t('BlogModule.blog', 'Please Sign in!'));
             } else {
                 Yii::app()->user->setFlash(
-                    YFlashMessages::SUCCESS_MESSAGE,
+                    yupe\widgets\YFlashMessages::SUCCESS_MESSAGE,
                     Yii::t('BlogModule.blog', 'Please Sign in!')
                 );
                 $this->redirect(array('/blog/blog/index'));
             }
         }
 
-        if ($blogId === null && Yii::app()->getRequest()->getIsPostRequest() && Yii::app()->getRequest()->getIsAjaxRequest())
+        if ($blogId === null && Yii::app()->getRequest()->getIsPostRequest()){
             $blogId = Yii::app()->getRequest()->getPost('blogId');
+        }
 
         $errorMessage = false;
 
         $blogId = (int) $blogId;
-        if (!$blogId)
-            $errorMessage = Yii::t('BlogModule.blog', 'blogId is not set!');
 
-        if (($blog = Blog::model()->loadModel($blogId)) === null)
+        if (!$blogId) {
+            $errorMessage = Yii::t('BlogModule.blog', 'blogId is not set!');
+        }
+
+        if (($blog = Blog::model()->loadModel($blogId)) === null) {
             $errorMessage = Yii::t('BlogModule.blog', 'Blog with id = {id} was not found!', array('{id}' => $blogId));
+        }
 
         if ($errorMessage !== false) {
             if (Yii::app()->getRequest()->getIsAjaxRequest()) {
                 Yii::app()->ajax->failure($errorMessage);
             } else {
                 Yii::app()->user->setFlash(
-                    YFlashMessages::ERROR_MESSAGE,
+                    yupe\widgets\YFlashMessages::ERROR_MESSAGE,
                     $errorMessage
                 );
                 $this->redirect(array('/blog/blog/index'));
@@ -108,7 +112,7 @@ class BlogController extends yupe\components\controllers\FrontController
                 );
             } else {
                 Yii::app()->user->setFlash(
-                    YFlashMessages::SUCCESS_MESSAGE,
+                    yupe\widgets\YFlashMessages::SUCCESS_MESSAGE,
                     Yii::t('BlogModule.blog', 'You have joined the blog!')
                 );
                 $this->redirect(array('/blog/blog/index'));
@@ -123,7 +127,7 @@ class BlogController extends yupe\components\controllers\FrontController
             else
             {
                 Yii::app()->user->setFlash(
-                    YFlashMessages::SUCCESS_MESSAGE,
+                    yupe\widgets\YFlashMessages::SUCCESS_MESSAGE,
                     Yii::t('BlogModule.blog', 'You have already joined this blog!')
                 );
                 $this->redirect(array('/blog/blog/index'));
@@ -145,7 +149,7 @@ class BlogController extends yupe\components\controllers\FrontController
                 Yii::app()->ajax->failure(Yii::t('BlogModule.blog', 'Please Sign in!'));
             } else {
                 Yii::app()->user->setFlash(
-                    YFlashMessages::SUCCESS_MESSAGE,
+                    yupe\widgets\YFlashMessages::SUCCESS_MESSAGE,
                     Yii::t('BlogModule.blog', 'Please Sign in!')
                 );
                 $this->redirect(array('/blog/blog/index'));
@@ -170,7 +174,7 @@ class BlogController extends yupe\components\controllers\FrontController
                 );
             } else {
                 Yii::app()->user->setFlash(
-                    YFlashMessages::ERROR_MESSAGE,
+                    yupe\widgets\YFlashMessages::ERROR_MESSAGE,
                     Yii::t('BlogModule.blog', 'You are creator of this blog and you can\'t leave.')
                 );
                 $this->redirect(array('/blog/blog/index'));
@@ -183,7 +187,7 @@ class BlogController extends yupe\components\controllers\FrontController
                 Yii::app()->ajax->failure($errorMessage);
             } else {
                 Yii::app()->user->setFlash(
-                    YFlashMessages::ERROR_MESSAGE,
+                    yupe\widgets\YFlashMessages::ERROR_MESSAGE,
                     $errorMessage
                 );
                 $this->redirect(array('/blog/blog/index'));
@@ -202,7 +206,7 @@ class BlogController extends yupe\components\controllers\FrontController
                     );
                 } else {
                     Yii::app()->user->setFlash(
-                        YFlashMessages::SUCCESS_MESSAGE,
+                        yupe\widgets\YFlashMessages::SUCCESS_MESSAGE,
                         Yii::t('BlogModule.blog', 'You left the blog!')
                     );
                     $this->redirect(array('/blog/blog/index'));
@@ -212,19 +216,20 @@ class BlogController extends yupe\components\controllers\FrontController
                     Yii::app()->ajax->failure(Yii::t('BlogModule.blog', 'An error occured when you were leaving the blog!'));
                 } else {
                     Yii::app()->user->setFlash(
-                        YFlashMessages::SUCCESS_MESSAGE,
+                        yupe\widgets\YFlashMessages::SUCCESS_MESSAGE,
                         Yii::t('BlogModule.blog', 'An error occured when you were leaving the blog!')
                     );
                     $this->redirect(array('/blog/blog/index'));
                 }
             }
         } else {
-            if (Yii::app()->getRequest()->getIsAjaxRequest())
+            if (Yii::app()->getRequest()->getIsAjaxRequest()) {
                 Yii::app()->ajax->failure(Yii::t('BlogModule.blog', 'You are not the member of this blog!'));
+            }
             else
             {
                 Yii::app()->user->setFlash(
-                    YFlashMessages::SUCCESS_MESSAGE,
+                    yupe\widgets\YFlashMessages::SUCCESS_MESSAGE,
                     Yii::t('BlogModule.blog', 'You are not the member of this blog!')
                 );
                 $this->redirect(array('/blog/blog/index'));

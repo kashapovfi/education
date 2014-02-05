@@ -17,9 +17,10 @@
  * NOTE, this file must be saved in UTF-8 encoding.
  */
 return array (
+  'Tags cloud' => 'Теги',
   ' The resulting interface is well integrated into the control panel of Yupe!.' => ' Полученный интерфейс благополучно интегрируется в панель управления Юпи!.',
   ' We are working with it =)' => ' активно ее пишем =)',
-  ' Yupe! developed and maintained by a team of enthusiasts, you can use Yupe! and any part of it <b>absolutely for free</b>' => ' Юпи! разрабатывается и поддерживается командой энтузиастов, Вы можете использовать Юпи! и любую его часть <b>совершенно бесплатно</b>',
+  ' Yupe! developed and maintained by a team of enthusiasts, you can use Yupe! and any part of it <b>absolutely for free</b>!' => ' Юпи! разрабатывается и поддерживается командой энтузиастов, Вы можете использовать Юпи! и любую его часть <b>совершенно бесплатно</b>!',
   ' run in: {time}' => ' выполнение: {time}',
   ' time: {qtime}' => ' время: {qtime}',
   '( You always can find another modules on {link} or {order_link} )' => '( дополнительные модули всегда можно поискать на {link} или {order_link} )',
@@ -161,7 +162,7 @@ return array (
   'Modules' => 'Модули',
   'Modules developed for "{app}"' => 'Модули разработанные специально для "{app}"',
   'More about themes' => 'Подробнее про темы оформления',
-  'More information and technical support you can find in our site {site}.' => 'Более подробную информацию и техническую поддержку Вы можете получить на сайте {site}.',
+  'More information and technical support you can find in our site {site}.' => 'Более подробную информацию и техническую поддержку вы можете получить на сайте {site}.',
   'Multilanguage module' => 'Модуль мультиязычный',
   'New module parameters will be added' => 'Будут добавлены новые данные для работы модуля.',
   'No need to downgrade migrations for {module}' => 'Для модуля {module} не требуется откат миграции.',
@@ -288,7 +289,7 @@ return array (
   'memory: {memory}' => 'память: {memory}',
   'module|module|modules' => 'модуль|модуля|модулей',
   'no' => 'нет',
-  'official site' => 'официальный сайт',
+  'official site' => 'официальном сайте',
   'order to develop them' => 'заказать их разработку',
   'php version' => 'версия php',
   'read on site' => 'читать на сайте',

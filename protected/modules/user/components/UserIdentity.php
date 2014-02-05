@@ -10,6 +10,8 @@
  * @link     http://yupe.ru
  *
  **/
+use yupe\models\Settings;
+
 class UserIdentity extends CUserIdentity
 {
     private $_id;
@@ -27,7 +29,7 @@ class UserIdentity extends CUserIdentity
             $this->errorCode = self::ERROR_PASSWORD_INVALID;
         } else {
             // запись данных в сессию пользователя
-            $this->_id = $user->id;
+            $this->_id      = $user->id;
             $this->username = $user->nick_name;
 
             $this->setState('id', $user->id);
@@ -44,19 +46,19 @@ class UserIdentity extends CUserIdentity
                 /* Получаем настройки по всем модулям для данного пользователя: */
                 $settings = Settings::model()->fetchUserModuleSettings($user->id);
                 $sessionSettings = array();
-
+                
                 /* Если передан не пустой массив, проходим по нему: */
                 if (!empty($settings) && is_array($settings)) {
-                    foreach ($settings as $sets) {
-                        /* Если есть атрибуты - продолжаем: */
-                        if (isset($sets->attributes)) {
-                            /* Наполняем нашу сессию: */
-                            if (!isset($sessionSettings[$sets->module_id]))
-                                $sessionSettings[$sets->module_id] = array();
-                            $sessionSettings[$sets->module_id][$sets->param_name] = $sets->param_value;
+                    foreach ($settings as $sets) {                          
+                        /* Наполняем нашу сессию: */
+                        if (!isset($sessionSettings[$sets->module_id])) {
+                            $sessionSettings[$sets->module_id] = array();
                         }
+
+                        $sessionSettings[$sets->module_id][$sets->param_name] = $sets->param_value;                        
                     }
                 }
+                
                 $this->setState('modSettings', $sessionSettings);
             }
 
@@ -66,6 +68,7 @@ class UserIdentity extends CUserIdentity
 
             $this->errorCode = self::ERROR_NONE;
         }
+        
         return $this->errorCode == self::ERROR_NONE;
     }
 

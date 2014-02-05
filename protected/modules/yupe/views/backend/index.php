@@ -62,8 +62,9 @@
                 continue;
             }
             
-            if ($module->getIsActive() || $module->getIsNoDisable())
+            if ($module->getIsActive() || $module->getIsNoDisable()) {
                 $enableCount++;
+            }
         }
         ?>
         <?php echo Yii::t('YupeModule.yupe', 'Installed'); ?>
@@ -88,7 +89,7 @@
 <legend><?php echo Yii::t('YupeModule.yupe', 'Fast access to modules'); ?></legend>
 <?php
 $this->widget(
-    'yupe.widgets.YShortCuts', array(
+    'yupe\widgets\YShortCuts', array(
         'shortcuts' => $modulesNavigation,
         'modules'   => $modules,
         'updates'   => Yii::app()->migrator->checkForUpdates($modules),

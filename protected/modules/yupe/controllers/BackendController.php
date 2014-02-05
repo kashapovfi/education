@@ -22,6 +22,8 @@
  * @link     http://yupe.ru
  *
  **/
+use yupe\models\Settings;
+
 class BackendController extends yupe\components\controllers\BackController
 {
     /**
@@ -31,7 +33,13 @@ class BackendController extends yupe\components\controllers\BackController
      **/
     public function actionIndex()
     {
-        $this->render('index', $this->yupe->getModules(false, true));
+        $this->render('index', Yii::app()->moduleManager->getModules(false, true));
+    }
+
+    public function actions()
+    {
+        return array( 'AjaxFileUpload' => 'yupe\components\actions\YAjaxFileUploadAction',
+                      'AjaxImageUpload' => 'yupe\components\actions\YAjaxImageUploadAction' );
     }
 
     /**
@@ -42,7 +50,7 @@ class BackendController extends yupe\components\controllers\BackController
     public function actionSettings()
     {
         $this->hideSidebar = true;
-        $this->render('settings', $this->yupe->getModules(false, true));
+        $this->render('settings', Yii::app()->moduleManager->getModules(false, true));
     }
 
     /**
@@ -168,15 +176,12 @@ class BackendController extends yupe\components\controllers\BackController
 
         // разместим в начале основные параметры 
         $elements = array_merge($mainParams, $elements);
-        
-        // сформировать боковое меню из ссылок на настройки модулей
-        $this->menu = $this->yupe->modules['modulesNavigation'][$this->yupe->category]['items']['settings']['items'];
 
         $this->render(
             'modulesettings', array(
-            'module'             => $module,
-            'elements'           => $elements,
-            'moduleParamsLabels' => $moduleParamsLabels,
+                'module'             => $module,
+                'elements'           => $elements,
+                'moduleParamsLabels' => $moduleParamsLabels,
             )
         );
     }
@@ -199,7 +204,7 @@ class BackendController extends yupe\components\controllers\BackController
 
             if ($this->saveParamsSetting($moduleId, $module->editableParamsKey)) {
                 Yii::app()->user->setFlash(
-                    YFlashMessages::SUCCESS_MESSAGE,
+                    yupe\widgets\YFlashMessages::SUCCESS_MESSAGE,
                     Yii::t(
                         'YupeModule.yupe', 'Settings for "{module}" saved successfully!', array(
                             '{module}' => $module->getName()
@@ -209,7 +214,7 @@ class BackendController extends yupe\components\controllers\BackController
                 $module->getSettings(true);
             } else {
                 Yii::app()->user->setFlash(
-                    YFlashMessages::ERROR_MESSAGE,
+                    yupe\widgets\YFlashMessages::ERROR_MESSAGE,
                     Yii::t('YupeModule.yupe', 'There is an error when saving settings!')
                 );
             }
@@ -228,14 +233,14 @@ class BackendController extends yupe\components\controllers\BackController
         if (Yii::app()->getRequest()->getIsPostRequest()) {
             if ($this->saveParamsSetting($this->yupe->coreModuleId, array('theme', 'backendTheme'))) {
                 Yii::app()->user->setFlash(
-                    YFlashMessages::SUCCESS_MESSAGE,
+                    yupe\widgets\YFlashMessages::SUCCESS_MESSAGE,
                     Yii::t('YupeModule.yupe', 'Themes settings saved successfully!')
                 );
                 Yii::app()->cache->clear('yupe');
             }
             else{
                 Yii::app()->user->setFlash(
-                    YFlashMessages::ERROR_MESSAGE,
+                    yupe\widgets\YFlashMessages::ERROR_MESSAGE,
                     Yii::t('YupeModule.yupe', 'There is an error when saving settings!')
                 );
             }
@@ -304,6 +309,7 @@ class BackendController extends yupe\components\controllers\BackController
                 }
             }
         }
+        
         return true;
     }
 
@@ -318,7 +324,7 @@ class BackendController extends yupe\components\controllers\BackController
     {
         if ($name) {
             if (($module = Yii::app()->getModule($name)) == null) {
-                $module = $this->yupe->getCreateModule($name);
+                $module = Yii::app()->moduleManager->getCreateModule($name);
             }
 
             if ($module->getIsInstalled()) {
@@ -327,73 +333,25 @@ class BackendController extends yupe\components\controllers\BackController
                     Yii::app()->migrator->updateToLatest($name);
 
                     Yii::app()->user->setFlash(
-                        YFlashMessages::SUCCESS_MESSAGE,
+                        yupe\widgets\YFlashMessages::SUCCESS_MESSAGE,
                         Yii::t('YupeModule.yupe', 'Module was updated their migrations!')
                     );
-                    $this->redirect(array("/yupe/backend"));
+                    $this->redirect(array("backend"));
                 } else
                     $this->render('modupdate', array('updates' => $updates, 'module' => $module));
             } else
                 Yii::app()->user->setFlash(
-                    YFlashMessages::ERROR_MESSAGE,
+                    yupe\widgets\YFlashMessages::ERROR_MESSAGE,
                     Yii::t('YupeModule.yupe', 'Module doesn\'t installed!')
                 );
         } else {
             Yii::app()->user->setFlash(
-                YFlashMessages::ERROR_MESSAGE,
+                yupe\widgets\YFlashMessages::ERROR_MESSAGE,
                 Yii::t('YupeModule.yupe', 'Module name is not set!')
             );
 
             $this->redirect(Yii::app()->getRequest()->urlReferrer !== null ? Yii::app()->getRequest()->urlReferrer : array("/yupe/backend"));
         }
-    }
-
-    /**
-     * Метод для загрузки файлов из редактора при создании контента
-     *
-     * @since 0.4
-     *
-     * Подробнее http://imperavi.com/redactor/docs/images/
-     *
-     * @return void
-     */
-    public function actionAjaxFileUpload()
-    {
-        if (!empty($_FILES['file']['name'])) {
-            $rename     = (bool) Yii::app()->getRequest()->getQuery('rename', true);
-            $webPath    = '/' . $this->yupe->uploadPath . '/' . date('dmY') . '/';
-            $uploadPath = Yii::getPathOfAlias('webroot') . $webPath;
-
-            if (!is_dir($uploadPath)) {
-                if (!@mkdir($uploadPath)) {
-                    Yii::app()->ajax->rawText(Yii::t('YupeModule.yupe', 'Can\'t create catalog "{dir}" for files!', array('{dir}' => $uploadPath)));
-                }
-            }
-
-            $this->disableProfilers();
-
-            $file = CUploadedFile::getInstanceByName('file');
-
-            if ($file) {
-                //сгенерировать имя файла и сохранить его
-                $newFileName = $rename ? md5(time() . uniqid() . $file->name) . '.' . $file->extensionName : $file->name;
-
-                if (!$file->saveAs($uploadPath . $newFileName)) {
-                    Yii::app()->ajax->rawText(Yii::t('YupeModule.yupe', 'There is an error when downloading!'));
-                }
-
-                Yii::app()->ajax->rawText(
-                    json_encode(
-                        array(
-                            'filelink' => Yii::app()->baseUrl . $webPath . $newFileName,
-                            'filename' => $file->name
-                        )
-                    )
-                );
-            }
-        }
-
-        Yii::app()->ajax->rawText(Yii::t('YupeModule.yupe', 'There is an error when downloading!'));
     }
 
     /**
@@ -431,7 +389,7 @@ class BackendController extends yupe\components\controllers\BackController
             && ($status = Yii::app()->getRequest()->getPost('status')) !== null
             && (($module = Yii::app()->getModule($name)) === null || $module->canActivate())
         )
-            $module = $this->yupe->getCreateModule($name);
+            $module = Yii::app()->moduleManager->getCreateModule($name);
         /**
          * Если статус неизвестен - ошибка:
          **/
@@ -472,7 +430,7 @@ class BackendController extends yupe\components\controllers\BackController
                         ? Yii::t('YupeModule.yupe', 'Settings file "{n}" updated successfully!', $name)
                         : Yii::t('YupeModule.yupe', 'There is en error when trying to update "{n}" file module!', $name);
                     Yii::app()->user->setFlash(
-                        $result ? YFlashMessages::SUCCESS_MESSAGE : YFlashMessages::ERROR_MESSAGE,
+                        $result ? yupe\widgets\YFlashMessages::SUCCESS_MESSAGE : yupe\widgets\YFlashMessages::ERROR_MESSAGE,
                         $message
                     );
                     break;
@@ -513,7 +471,7 @@ class BackendController extends yupe\components\controllers\BackController
             $dirsList = glob(Yii::app()->assetManager->getBasePath() . DIRECTORY_SEPARATOR . '*', GLOB_ONLYDIR);
             if (is_array($dirsList)) {
                 foreach ($dirsList as $item) {
-                    YFile::rmDir($item);
+                    yupe\helpers\YFile::rmDir($item);
                 }
             }
             return true;
@@ -599,7 +557,7 @@ class BackendController extends yupe\components\controllers\BackController
      **/
     public function actionReportBug()
     {
-        $form = new BugForm;
+        $form = new yupe\models\BugForm;
 
         if (Yii::app()->getRequest()->getIsPostRequest() && ($bugData = Yii::app()->getRequest()->getPost('BugForm'))) {
             $form->setAttributes($bugData);
@@ -614,7 +572,7 @@ class BackendController extends yupe\components\controllers\BackController
                     $form->message
                 );
                 Yii::app()->user->setFlash(
-                    YFlashMessages::SUCCESS_MESSAGE,
+                    yupe\widgets\YFlashMessages::SUCCESS_MESSAGE,
                     Yii::t('YupeModule.yupe', 'Message sent!')
                 );
                 $this->redirect('/yupe/backend/reportBug');

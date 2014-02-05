@@ -41,17 +41,10 @@ class CategoryBackendController extends yupe\components\controllers\BackControll
 
             $model->setAttributes($data);
 
-			if ($model->parent_id)
-			{
-				$result = $model->appendTo($this->loadModel($model->parent_id));
-			} else {
-				$result = $model->saveNode();
-			}
-
-            if ($result) {
+            if ($model->save()) {
 
                 Yii::app()->user->setFlash(
-                    YFlashMessages::SUCCESS_MESSAGE,
+                    yupe\widgets\YFlashMessages::SUCCESS_MESSAGE,
                     Yii::t('CategoryModule.category', 'Record was created!')
                 );
 
@@ -74,7 +67,7 @@ class CategoryBackendController extends yupe\components\controllers\BackControll
 
             if(null === $category) {
                 Yii::app()->user->setFlash(
-                    YFlashMessages::ERROR_MESSAGE,
+                    yupe\widgets\YFlashMessages::ERROR_MESSAGE,
                     Yii::t('CategoryModule.category', 'Targeting category was not found!')
                 );
                 $this->redirect(array('create'));
@@ -82,7 +75,7 @@ class CategoryBackendController extends yupe\components\controllers\BackControll
 
             if(!array_key_exists($lang, $languages)) {
                 Yii::app()->user->setFlash(
-                    YFlashMessages::ERROR_MESSAGE,
+                    yupe\widgets\YFlashMessages::ERROR_MESSAGE,
                     Yii::t('CategoryModule.category', 'Language was not found!')
                 );
 
@@ -90,7 +83,7 @@ class CategoryBackendController extends yupe\components\controllers\BackControll
             }
 
             Yii::app()->user->setFlash(
-                YFlashMessages::SUCCESS_MESSAGE,
+                yupe\widgets\YFlashMessages::SUCCESS_MESSAGE,
                 Yii::t(
                     'CategoryModule.category', 'You are adding translate in to {lang}!', array(
                         '{lang}' => $languages[$lang]
@@ -128,17 +121,10 @@ class CategoryBackendController extends yupe\components\controllers\BackControll
         if (($data = Yii::app()->getRequest()->getPost('Category')) !== null) {
             $model->setAttributes(Yii::app()->getRequest()->getPost('Category'));
 
-			if ($model->parent_id)
-			{
-				$result = $model->appendTo($this->loadModel($model->parent_id));
-			} else {
-				$result = $model->saveNode();
-			}
-
-			if ($result) {
+			if ($model->save()) {
 
                 Yii::app()->user->setFlash(
-                    YFlashMessages::SUCCESS_MESSAGE,
+                    yupe\widgets\YFlashMessages::SUCCESS_MESSAGE,
                     Yii::t('CategoryModule.category', 'Category was changed!')
                 );
 
@@ -188,7 +174,7 @@ class CategoryBackendController extends yupe\components\controllers\BackControll
 
             try {
                 // поддерживаем удаление только из POST-запроса
-                $this->loadModel($id)->deleteNode();
+                $this->loadModel($id)->delete();
                 // if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
 
                 $transaction->commit();
