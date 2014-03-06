@@ -144,7 +144,7 @@ class CodeGuy extends \Codeception\AbstractGuy
      *
      * ``` php
      * <?php
-     * $I->seeInDatabase('users', array('name' => 'Davert', 'email' => 'davert@mail.com'));
+     * $I->dontSeeInDatabase('users', array('name' => 'Davert', 'email' => 'davert@mail.com'));
      *
      * ```
      * Will generate:
@@ -182,7 +182,7 @@ class CodeGuy extends \Codeception\AbstractGuy
      *
      * ``` php
      * <?php
-     * $I->seeInDatabase('users', array('name' => 'Davert', 'email' => 'davert@mail.com'));
+     * $I->dontSeeInDatabase('users', array('name' => 'Davert', 'email' => 'davert@mail.com'));
      *
      * ```
      * Will generate:
@@ -233,6 +233,25 @@ class CodeGuy extends \Codeception\AbstractGuy
      */
     public function grabFromDatabase($table, $column, $criteria = null) {
         $this->scenario->addStep(new \Codeception\Step\Action('grabFromDatabase', func_get_args()));
+        if ($this->scenario->running()) {
+            $result = $this->scenario->runStep();
+            return new Maybe($result);
+        }
+        return new Maybe();
+    }
+
+ 
+    /**
+     * This method is generated.
+     * Documentation taken from corresponding module.
+     * ----------------------------------------------
+     *
+     *
+     * @see Codeception\Module::getName()
+     * @return \Codeception\Maybe
+     */
+    public function getName() {
+        $this->scenario->addStep(new \Codeception\Step\Action('getName', func_get_args()));
         if ($this->scenario->running()) {
             $result = $this->scenario->runStep();
             return new Maybe($result);

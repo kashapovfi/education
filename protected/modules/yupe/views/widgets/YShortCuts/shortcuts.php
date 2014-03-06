@@ -18,9 +18,20 @@ if (count($this->shortcuts) > 0) {
     foreach ($this->shortcuts as $name => $shortcut) {
         if (isset($shortcut['items'])) {
             foreach ($shortcut['items'] as $module => $item) {
+                if(in_array($module, Yii::app()->params->hiddenBackendModules)){
+                    continue;
+                }
+
+                if(isset($item['label']) && $item['label'] == 'Blogs'){
+                    $item['label'] = str_replace('Blogs', 'User Plans', $item['label']);
+                    $item['url'] = str_replace('/blog/blogBackend/index', '/blog/postBackend/index', $item['url']);
+                }
+
                 if(!isset($item['icon'], $item['url'])) {
                     continue;
                 }
+
+
                 echo CHtml::link(
                     '<div class="cn">' . $this->getLabel($item) . $this->getUpdates($item, $module) . "</div>",
                     $item['url'],

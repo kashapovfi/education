@@ -5,7 +5,7 @@
         : array('class' => 'btn-danger', 'text' => 'IN PROGRESS',
             'state' => array('class' => 'btn btn-warning btn-large'));
 
-    $statusCreate = Post::model()->canUserCreatePlan(Yii::app()->user->getId());
+    $statusCreate = true;
     $statusCreate = $statusCreate === !Yii::app()->user->isSuperUser()
         ? array('class' => 'btn btn-success btn-large')
         : array('disabled' => 'disabled', 'class' => 'btn btn-success btn-large');
@@ -22,7 +22,7 @@
         <h3>My active plan</h3>
 
         <div class="pull-right">
-            <h3><span class="label <?php echo $status['class']; ?>"><?php echo $status['text']; ?></span></h3>
+            <h3><span class="label <?php echo $status['class']; ?>"><?php echo $model->getProgressAsString($plan[0]->progress); ?></span></h3>
         </div>
     </div>
 

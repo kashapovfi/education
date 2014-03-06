@@ -9,7 +9,7 @@
  *   @link     http://yupe.ru
  **/
 $this->breadcrumbs = array(   
-    Yii::t('BlogModule.blog', 'Posts') => array('/blog/postBackend/index'),
+    Yii::t('BlogModule.blog', 'Plans') => array('/blog/postBackend/index'),
     $model->title => array('/blog/postBackend/view', 'id' => $model->id),
     Yii::t('BlogModule.blog', 'Edit'),
 );
@@ -52,7 +52,7 @@ $this->menu = array(
 ?>
 <div class="page-header">
     <h1>
-        <?php echo Yii::t('BlogModule.blog', 'Edit post'); ?><br />
+        <?php echo Yii::t('BlogModule.blog', 'Edit plan'); ?><br />
         <small>&laquo;<?php echo $model->title; ?>&raquo;</small>
     </h1>
 </div>

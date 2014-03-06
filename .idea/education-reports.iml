@@ -5,6 +5,7 @@
   </component>
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/tests" isTestSource="true" />
       <excludeFolder url="file://$MODULE_DIR$/composer" />
       <excludeFolder url="file://$MODULE_DIR$/protected/commands" />
       <excludeFolder url="file://$MODULE_DIR$/protected/modules/blog/guide" />
@@ -25,9 +26,9 @@
       <excludeFolder url="file://$MODULE_DIR$/protected/modules/page" />
       <excludeFolder url="file://$MODULE_DIR$/protected/modules/queue" />
       <excludeFolder url="file://$MODULE_DIR$/protected/modules/yeeki" />
-      <excludeFolder url="file://$MODULE_DIR$/protected/modules/yupe" />
       <excludeFolder url="file://$MODULE_DIR$/protected/modules/zendsearch" />
       <excludeFolder url="file://$MODULE_DIR$/protected/runtime" />
+      <excludeFolder url="file://$MODULE_DIR$/read.me" />
       <excludeFolder url="file://$MODULE_DIR$/themes/default/views/_partial" />
       <excludeFolder url="file://$MODULE_DIR$/themes/default/views/catalog" />
       <excludeFolder url="file://$MODULE_DIR$/themes/default/views/comment" />
@@ -39,7 +40,6 @@
       <excludeFolder url="file://$MODULE_DIR$/themes/default/views/news" />
       <excludeFolder url="file://$MODULE_DIR$/themes/default/views/page" />
       <excludeFolder url="file://$MODULE_DIR$/themes/default/views/social" />
-      <excludeFolder url="file://$MODULE_DIR$/themes/default/views/yupe" />
       <excludeFolder url="file://$MODULE_DIR$/themes/default/views/zendsearch" />
       <excludeFolder url="file://$MODULE_DIR$/vendor" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/behat/mink" />
@@ -98,12 +98,16 @@
           <root url="file://$MODULE_DIR$/vendor/symfony/css-selector" />
           <root url="file://$MODULE_DIR$/vendor/symfony/console" />
           <root url="file://$MODULE_DIR$/vendor/yiiext/nested-set-behavior" />
+          <root url="file://$MODULE_DIR$/vendor/mustache/mustache" />
+          <root url="file://$MODULE_DIR$/vendor/swiftmailer/swiftmailer" />
           <root url="file://$MODULE_DIR$/vendor/monolog/monolog" />
+          <root url="file://$MODULE_DIR$/vendor/crisu83/yiistrap" />
           <root url="file://$MODULE_DIR$/vendor/guzzle/stream" />
           <root url="file://$MODULE_DIR$/vendor/behat/mink" />
           <root url="file://$MODULE_DIR$/vendor/guzzle/common" />
           <root url="file://$MODULE_DIR$/vendor/composer" />
           <root url="file://$MODULE_DIR$/vendor/symfony/event-dispatcher" />
+          <root url="file://$MODULE_DIR$/vendor/cornernote/yii-email-module" />
           <root url="file://$MODULE_DIR$/vendor/behat/mink-browserkit-driver" />
           <root url="file://$MODULE_DIR$/vendor/behat/mink-goutte-driver" />
           <root url="file://$MODULE_DIR$/vendor/guzzle/http" />
@@ -126,6 +130,7 @@
           <root url="file://$MODULE_DIR$/vendor/phpunit/php-code-coverage" />
           <root url="file://$MODULE_DIR$/vendor/yiiext/imperavi-redactor-widget" />
           <root url="file://$MODULE_DIR$/vendor/symfony/browser-kit" />
+          <root url="file://$MODULE_DIR$/vendor/tlikai/yii-mailer" />
           <root url="file://$MODULE_DIR$/vendor/fabpot/goutte" />
           <root url="file://$MODULE_DIR$/vendor/zhuravljov/yii2-debug" />
           <root url="file://$MODULE_DIR$/vendor/phpunit/php-timer" />
@@ -135,12 +140,16 @@
           <root url="file://$MODULE_DIR$/vendor/symfony/css-selector" />
           <root url="file://$MODULE_DIR$/vendor/symfony/console" />
           <root url="file://$MODULE_DIR$/vendor/yiiext/nested-set-behavior" />
+          <root url="file://$MODULE_DIR$/vendor/mustache/mustache" />
+          <root url="file://$MODULE_DIR$/vendor/swiftmailer/swiftmailer" />
           <root url="file://$MODULE_DIR$/vendor/monolog/monolog" />
+          <root url="file://$MODULE_DIR$/vendor/crisu83/yiistrap" />
           <root url="file://$MODULE_DIR$/vendor/guzzle/stream" />
           <root url="file://$MODULE_DIR$/vendor/behat/mink" />
           <root url="file://$MODULE_DIR$/vendor/guzzle/common" />
           <root url="file://$MODULE_DIR$/vendor/composer" />
           <root url="file://$MODULE_DIR$/vendor/symfony/event-dispatcher" />
+          <root url="file://$MODULE_DIR$/vendor/cornernote/yii-email-module" />
           <root url="file://$MODULE_DIR$/vendor/behat/mink-browserkit-driver" />
           <root url="file://$MODULE_DIR$/vendor/behat/mink-goutte-driver" />
           <root url="file://$MODULE_DIR$/vendor/guzzle/http" />
@@ -163,6 +172,7 @@
           <root url="file://$MODULE_DIR$/vendor/phpunit/php-code-coverage" />
           <root url="file://$MODULE_DIR$/vendor/yiiext/imperavi-redactor-widget" />
           <root url="file://$MODULE_DIR$/vendor/symfony/browser-kit" />
+          <root url="file://$MODULE_DIR$/vendor/tlikai/yii-mailer" />
           <root url="file://$MODULE_DIR$/vendor/fabpot/goutte" />
           <root url="file://$MODULE_DIR$/vendor/zhuravljov/yii2-debug" />
           <root url="file://$MODULE_DIR$/vendor/phpunit/php-timer" />

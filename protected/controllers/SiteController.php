@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Дефолтный контроллер сайта:
  *
@@ -17,7 +18,13 @@ class SiteController extends yupe\components\controllers\FrontController
     public function actionModern()
     {
         $this->render('modern');
-    }    
+    }
+
+    public function actionTest()
+    {
+        //Yii::app()->mailer->send('diwms@yandex.ua', 'THEME', 'CONTENT');
+        $this->renderPartial('mail');
+    }
 
 
     /**
@@ -43,9 +50,11 @@ class SiteController extends yupe\components\controllers\FrontController
             $this->redirect(array('index'));
         }
 
-        if(!Yii::app()->getRequest()->getIsAjaxRequest()){
+        if (!Yii::app()->getRequest()->getIsAjaxRequest()) {
 
-            $this->render('error', array(
+            $this->render(
+                'error',
+                array(
                     'error' => $error
                 )
             );
@@ -63,9 +72,41 @@ class SiteController extends yupe\components\controllers\FrontController
                     'limit' => self::POST_PER_PAGE,
                     'order' => 't.id DESC',
                     'with' => array('createUser', 'blog', 'commentsCount'),
-            )),
+                )),
         ));
 
         $this->render('main', array('dataProvider' => $dataProvider));
+    }
+
+    /**
+     * Check for a job and send mails
+     *
+     * TODO: After testing move to mail module
+     */
+    public function actionCron()
+    {
+        Yii::import('application.modules.mail.models.*');
+        /**
+         * 1) Нам треба подивитись які є івенти
+         * 2) Аналіз івента, якщо підходяща дата то грузим темплейт
+         * 3) Парсим темплейт, підставляєм дані і все-таке.
+         * 4) Відправляєм адресату
+         */
+
+
+        $events = MailEvent::model()->findAll();
+
+        foreach ($events as $event) {
+            //Якщо треба виконувати кожного місяця
+            if ((bool)$event->every_month) {
+                //Якщо день збігається з сьогоднішнім
+                if (date('d', strtotime('today')) === date('d', strtotime('2014-02-11'))) {
+                    $template = MailTemplate::model()->findAllByPk($event->id);
+                    if (count($template) >= 1) {
+                        var_dump($template);
+                    }
+                }
+            };
+        }
     }
 }

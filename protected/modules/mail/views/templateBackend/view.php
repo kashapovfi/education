@@ -27,8 +27,6 @@ $this->menu=array(
             'value' => $model->event->name,
         ),
         'name',
-        'description',
-        'from',
         'to',
         'theme',
         'body',

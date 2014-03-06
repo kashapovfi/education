@@ -52,8 +52,46 @@ class Post extends yupe\models\YModel
     const STATUS_PUBLISHED = 1;
     const STATUS_SHEDULED = 2;
 
+    const PROGRESS_NOT_DONE = 1;
+    const PROGRESS_POOR_DONE = 2;
+    const PROGRESS_REGULAR_DONE = 3;
+    const PROGRESS_ALMOST_DONE = 4;
+    const PROGRESS_DONE = 5;
+
     const ACCESS_PUBLIC = 1;
     const ACCESS_PRIVATE = 2;
+
+    public function getProgressAsString($progress = null, $asArray = false)
+    {
+        if ($asArray) {
+            $resultArray = array();
+
+            for ($i = 1; $i <= 5; $i++) {
+                $resultArray = array_merge_recursive($resultArray, array($i => $this->getProgressAsString($i)));
+            }
+            if (isset($resultArray[0])) {
+                array_unshift($resultArray, '');
+                unset($resultArray[0]);
+            }
+
+            return $resultArray;
+        }
+        switch ($progress) {
+            case self::PROGRESS_NOT_DONE:
+                return 'Not Done!';
+            case self::PROGRESS_POOR_DONE:
+                return 'Poor Done!';
+            case self::PROGRESS_REGULAR_DONE:
+                return 'Regular Done!';
+            case self::PROGRESS_ALMOST_DONE:
+                return 'Almost Done!';
+            case self::PROGRESS_DONE:
+                return 'Done!';
+
+            default:
+                return 'Not Done!';
+        }
+    }
 
     /**
      * Returns the static model of the specified AR class.
@@ -81,7 +119,7 @@ class Post extends yupe\models\YModel
         // NOTE: you should only define rules for those attributes that
         // will receive user inputs.
         return array(
-            array('blog_id, content, status', 'required', 'except' => 'search'),
+            array('content', 'required', 'except' => 'search'),
             array(
                 'blog_id, progress, create_user_id, update_user_id, status, comment_status, access_type, create_date, update_date, category_id',
                 'numerical',
@@ -626,7 +664,7 @@ class Post extends yupe\models\YModel
                 ->select('*')
                 ->from('{{blog_post}}')
                 ->where(
-                    'year(FROM_UNIXTIME(create_date)) = :year and month(FROM_UNIXTIME(create_date)) = :month',
+                    'YEAR(FROM_UNIXTIME(publish_date)) = :year and MONTH(FROM_UNIXTIME(publish_date)) = :month',
                     array(':year' => $year, ':month' => $month)
                 )
                 ->order('progress ASC')
@@ -639,13 +677,16 @@ class Post extends yupe\models\YModel
         return false;
     }
 
-    public function canUserCreatePlan($userId)
+    public function userHaveMonthPlan($userId, $month = null)
     {
         if ($userId) {
             $res = Yii::app()->db->createCommand()
-                ->select('create_date, create_user_id')
+                ->select('publish_date, create_user_id')
                 ->from('{{blog_post}}')
-                ->where('FROM_UNIXTIME(create_date) >= CURRENT_DATE')
+                ->where(
+                    'MONTH(FROM_UNIXTIME(publish_date)) = :month_current',
+                    array('month_current' => !is_null($month) ? $month : date('m'))
+                )
                 ->andWhere('create_user_id = :id', array(':id' => $userId))
                 ->queryRow();
 

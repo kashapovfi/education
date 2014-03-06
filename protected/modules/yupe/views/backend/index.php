@@ -50,7 +50,7 @@
 <?php endforeach; ?>
 
 
-<div class="alert">
+<div style="display: none" class="alert">
     <p>
         <?php
         $yiiCount    = count($yiiModules);

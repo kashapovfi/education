@@ -6,9 +6,9 @@
  * The followings are the available columns in table 'mail_event':
  *
  * @property string $id
- * @property string $code
  * @property string $name
- * @property string $description
+ * @property string $every_month
+ * @property string $date
  *
  * The followings are the available model relations:
  * @property MailTemplate[] $mailTemplates
@@ -56,15 +56,12 @@ class MailEvent extends yupe\models\YModel
         // NOTE: you should only define rules for those attributes that
         // will receive user inputs.
         return array(
-            array('name, code, description', 'filter', 'filter' => array($obj = new CHtmlPurifier(), 'purify')),
-            array('code, name', 'required'),
-            array('code', 'length', 'max' => 100),
+            array('name', 'filter', 'filter' => array($obj = new CHtmlPurifier(), 'purify')),
+            array('name, date, every_month', 'required'),
+            array('every_month', 'numerical', 'integerOnly' => true),
             array('name', 'length', 'max' => 300),
-            array('description', 'safe'),
-            array('code', 'unique'),
-            // The following rule is used by search().
             // Please remove those attributes that should not be searched.
-            array('id, code, name, description', 'safe', 'on' => 'search'),
+            array('id, name, date', 'safe', 'on' => 'search'),
         );
     }
 
@@ -90,10 +87,10 @@ class MailEvent extends yupe\models\YModel
     public function attributeLabels()
     {
         return array(
-            'id'          => Yii::t('MailModule.mail', 'ID'),
-            'code'        => Yii::t('MailModule.mail', 'Symbolic code'),
-            'name'        => Yii::t('MailModule.mail', 'Title'),
-            'description' => Yii::t('MailModule.mail', 'Description'),
+            'id' => Yii::t('MailModule.mail', 'ID'),
+            'date' => Yii::t('MailModule.mail', 'Event Date'),
+            'every_month' => Yii::t('MailModule.mail', 'Do event every month?'),
+            'name' => Yii::t('MailModule.mail', 'Title'),
         );
     }
 
@@ -123,9 +120,7 @@ class MailEvent extends yupe\models\YModel
         $criteria = new CDbCriteria;
 
         $criteria->compare('id', $this->id, true);
-        $criteria->compare('code', $this->code, true);
         $criteria->compare('name', $this->name, true);
-        $criteria->compare('description', $this->description, true);
 
         return new CActiveDataProvider(get_class($this), array('criteria' => $criteria));
     }

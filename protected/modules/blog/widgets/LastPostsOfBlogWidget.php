@@ -24,7 +24,7 @@ class LastPostsOfBlogWidget extends yupe\widgets\YWidget
 
         if ($this->customPosts === false) {
             $posts = Post::model()->getByMonth(date('m'), date('Y'));
-            $this->render($this->view, array('posts' => $posts));
+            $this->render($this->view, array('posts' => $posts, 'model' => Post::model()));
         } else {
             $this->render($this->view, array('posts' => $this->customPosts));
         }

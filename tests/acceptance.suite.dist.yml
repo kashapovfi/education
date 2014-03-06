@@ -19,7 +19,7 @@ modules:
     config:
         Selenium2:
             host: '127.0.0.1'
-            url: 'http://yupe.local/index-test.php'
+            url: 'http://edu.local/index-test.php'
             browser: firefox
             delay: 100
         DbHelper:

@@ -975,21 +975,10 @@ class WebGuy extends \Codeception\AbstractGuy
      * Documentation taken from corresponding module.
      * ----------------------------------------------
      *
-     * Check if current page doesn't contain the text specified.
-     * Specify the css selector to match only specific region.
+     * @param string $text
+     * @param string $selector
      *
-     * Examples:
-     *
-     * ```php
-     * <?php
-     * $I->dontSee('Login'); // I can suppose user is already logged in
-     * $I->dontSee('Sign Up','h1'); // I can suppose it's not a signup page
-     * $I->dontSee('Sign Up','//body/h1'); // with XPath
-     * ?>
-     * ```
-     *
-     * @param $text
-     * @param null $selector
+     * @return void
     * Conditional Assertion: Test won't be stopped on fail
      * @see Codeception\Util\Mink::dontSee()
      * @return \Codeception\Maybe
@@ -1007,21 +996,10 @@ class WebGuy extends \Codeception\AbstractGuy
      * Documentation taken from corresponding module.
      * ----------------------------------------------
      *
-     * Check if current page doesn't contain the text specified.
-     * Specify the css selector to match only specific region.
+     * @param string $text
+     * @param string $selector
      *
-     * Examples:
-     *
-     * ```php
-     * <?php
-     * $I->dontSee('Login'); // I can suppose user is already logged in
-     * $I->dontSee('Sign Up','h1'); // I can suppose it's not a signup page
-     * $I->dontSee('Sign Up','//body/h1'); // with XPath
-     * ?>
-     * ```
-     *
-     * @param $text
-     * @param null $selector
+     * @return void
      * @see Codeception\Util\Mink::dontSee()
      * @return \Codeception\Maybe
      */
@@ -2404,6 +2382,25 @@ class WebGuy extends \Codeception\AbstractGuy
      * Documentation taken from corresponding module.
      * ----------------------------------------------
      *
+     *
+     * @see Codeception\Module::getName()
+     * @return \Codeception\Maybe
+     */
+    public function getName() {
+        $this->scenario->addStep(new \Codeception\Step\Action('getName', func_get_args()));
+        if ($this->scenario->running()) {
+            $result = $this->scenario->runStep();
+            return new Maybe($result);
+        }
+        return new Maybe();
+    }
+
+ 
+    /**
+     * This method is generated.
+     * Documentation taken from corresponding module.
+     * ----------------------------------------------
+     *
      * Saves screenshot of browser window and saves to `_logs/debug/`
      *
      * Optionally you can provide a screenshot name.
@@ -2583,7 +2580,7 @@ class WebGuy extends \Codeception\AbstractGuy
      *
      * ``` php
      * <?php
-     * $I->seeInDatabase('users', array('name' => 'Davert', 'email' => 'davert@mail.com'));
+     * $I->dontSeeInDatabase('users', array('name' => 'Davert', 'email' => 'davert@mail.com'));
      *
      * ```
      * Will generate:
@@ -2621,7 +2618,7 @@ class WebGuy extends \Codeception\AbstractGuy
      *
      * ``` php
      * <?php
-     * $I->seeInDatabase('users', array('name' => 'Davert', 'email' => 'davert@mail.com'));
+     * $I->dontSeeInDatabase('users', array('name' => 'Davert', 'email' => 'davert@mail.com'));
      *
      * ```
      * Will generate:

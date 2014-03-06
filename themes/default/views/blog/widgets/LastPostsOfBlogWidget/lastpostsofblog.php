@@ -29,7 +29,7 @@ if (is_string($posts)) {
             ?>
             <div class="panel panel-default posts-list-block">
                                     <span class="pull-right" style="padding: 10px">
-                        <span class="label <?php echo $status['class']; ?>"><?php echo $status['text']; ?></span>
+                        <span class="label <?php echo $status['class']; ?>"><?php echo $model->getProgressAsString($post->progress); ?></span>
                     </span>
                 <div class="posts-list-block-meta panel-body">
                     <span>
@@ -55,7 +55,7 @@ if (is_string($posts)) {
 
                 </div>
 
-                <div class="posts-list-block-text">
+                <div class="posts-list-block-text" style="word-break: break-all">
                     <?php echo $post->content; ?>
                 </div>
             </div>

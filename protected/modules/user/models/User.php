@@ -80,7 +80,6 @@ class User extends yupe\models\YModel
             array('about', 'length', 'max' => 300),
             array('location', 'length', 'max' => 150),
             array('gender, status, access_level', 'numerical', 'integerOnly' => true),
-            array('nick_name', 'match', 'pattern' => '/^[A-Za-z0-9_-]{2,50}$/', 'message' => Yii::t('UserModule.user', 'Bad field format for "{attribute}". You can use only letters and digits from 2 to 20 symbols')),
             array('site', 'url', 'allowEmpty' => true),
             array('email', 'email'),
             array('email', 'unique', 'message' => Yii::t('UserModule.user', 'This email already use by another user')),

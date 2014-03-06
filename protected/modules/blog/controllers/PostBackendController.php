@@ -49,6 +49,8 @@ class PostBackendController extends yupe\components\controllers\BackController
         $model = new Post;
 
         $model->publish_date = date('d-m-Y h:i');
+        $model->blog_id = 1;
+        $model->status = POST::STATUS_PUBLISHED;
 
         if (Yii::app()->getRequest()->getIsPostRequest() && Yii::app()->getRequest()->getPost('Post')) {
             $model->setAttributes(

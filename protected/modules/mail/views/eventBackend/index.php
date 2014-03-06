@@ -75,26 +75,19 @@ $this->widget(
         'id'           => 'mail-event-grid',
         'type'         => 'condensed',
         'dataProvider' => $model->search(),
-        'filter'       => $model,
+        //  'filter'       => $model,
         'columns'      => array(
             'id',
-            'code',
             'name',
             array(
                 'header' => Yii::t('MailModule.mail', 'Templates'),
                 'type'   => 'raw',
                 'value'  => 'CHtml::link(count($data->templates), array("/mail/templateBackend/index/", "event" => $data->id))',
             ),
-            array(
-                'header'      => $model->getAttributeLabel('description'),
-                'value'       => '$data->shortDescription;',
-                'htmlOptions' => array(
-                    'style'   => 'width: 20%;'
-                ),
-            ),
+
             array(
                 'class'    => 'bootstrap.widgets.TbButtonColumn',
-                'template' => '{view}{update}{delete}{add}',
+                'template' => '{update}{delete}',
                 'buttons'  => array(
                     'add' => array(
                         'label'   => false,

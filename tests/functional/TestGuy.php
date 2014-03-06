@@ -292,7 +292,7 @@ class TestGuy extends \Codeception\AbstractGuy
      * ``` php
      * <?php
      * $I->openFile('composer.json');
-     * $I->seeInThisFile('codeception/codeception');
+     * $I->dontSeeInThisFile('codeception/codeception');
      * ?>
      * ```
      *
@@ -319,7 +319,7 @@ class TestGuy extends \Codeception\AbstractGuy
      * ``` php
      * <?php
      * $I->openFile('composer.json');
-     * $I->seeInThisFile('codeception/codeception');
+     * $I->dontSeeInThisFile('codeception/codeception');
      * ?>
      * ```
      *
@@ -445,6 +445,25 @@ class TestGuy extends \Codeception\AbstractGuy
      * Documentation taken from corresponding module.
      * ----------------------------------------------
      *
+     *
+     * @see Codeception\Module::getName()
+     * @return \Codeception\Maybe
+     */
+    public function getName() {
+        $this->scenario->addStep(new \Codeception\Step\Action('getName', func_get_args()));
+        if ($this->scenario->running()) {
+            $result = $this->scenario->runStep();
+            return new Maybe($result);
+        }
+        return new Maybe();
+    }
+
+ 
+    /**
+     * This method is generated.
+     * Documentation taken from corresponding module.
+     * ----------------------------------------------
+     *
      * Submits a form located on page.
      * Specify the form by it's css or xpath selector.
      * Fill the form fields values as array.
@@ -512,8 +531,8 @@ class TestGuy extends \Codeception\AbstractGuy
      *
      * ``` php
      * <?php
-     * $I->sendAjaxPostRequest('/updateSettings', array('notifications' => true); // POST
-     * $I->sendAjaxGetRequest('/updateSettings', array('notifications' => true); // GET
+     * $I->sendAjaxPostRequest('/updateSettings', array('notifications' => true)); // POST
+     * $I->sendAjaxGetRequest('/updateSettings', array('notifications' => true)); // GET
      *
      * ```
      *
@@ -549,6 +568,40 @@ class TestGuy extends \Codeception\AbstractGuy
      */
     public function sendAjaxGetRequest($uri, $params = null) {
         $this->scenario->addStep(new \Codeception\Step\Action('sendAjaxGetRequest', func_get_args()));
+        if ($this->scenario->running()) {
+            $result = $this->scenario->runStep();
+            return new Maybe($result);
+        }
+        return new Maybe();
+    }
+
+ 
+    /**
+     * This method is generated.
+     * Documentation taken from corresponding module.
+     * ----------------------------------------------
+     *
+     * If your page triggers an ajax request, you can perform it manually.
+     * This action sends an ajax request with specified method and params.
+     *
+     * Example:
+     *
+     * You need to perform an ajax request specifying the HTTP method.
+     *
+     * ``` php
+     * <?php
+     * $I->sendAjaxRequest('PUT', /posts/7', array('title' => 'new title');
+     *
+     * ```
+     *
+     * @param $method
+     * @param $uri
+     * @param $params
+     * @see Codeception\Module\PhpBrowser::sendAjaxRequest()
+     * @return \Codeception\Maybe
+     */
+    public function sendAjaxRequest($method, $uri, $params = null) {
+        $this->scenario->addStep(new \Codeception\Step\Action('sendAjaxRequest', func_get_args()));
         if ($this->scenario->running()) {
             $result = $this->scenario->runStep();
             return new Maybe($result);
@@ -684,8 +737,8 @@ class TestGuy extends \Codeception\AbstractGuy
      * ?>
      * ```
      *
-     * Not recommended this command too be used on regular basis.
-     * If Codeception lacks important Guzzle Client methods implement then and submit patches.
+     * It is not recommended to use this command on a regular basis.
+     * If Codeception lacks important Guzzle Client methods, implement them and submit patches.
      *
      * @param callable $function
      * @see Codeception\Module\PhpBrowser::executeInGuzzle()
@@ -885,21 +938,10 @@ class TestGuy extends \Codeception\AbstractGuy
      * Documentation taken from corresponding module.
      * ----------------------------------------------
      *
-     * Check if current page doesn't contain the text specified.
-     * Specify the css selector to match only specific region.
+     * @param string $text
+     * @param string $selector
      *
-     * Examples:
-     *
-     * ```php
-     * <?php
-     * $I->dontSee('Login'); // I can suppose user is already logged in
-     * $I->dontSee('Sign Up','h1'); // I can suppose it's not a signup page
-     * $I->dontSee('Sign Up','//body/h1'); // with XPath
-     * ?>
-     * ```
-     *
-     * @param $text
-     * @param null $selector
+     * @return void
     * Conditional Assertion: Test won't be stopped on fail
      * @see Codeception\Util\Mink::dontSee()
      * @return \Codeception\Maybe
@@ -917,21 +959,10 @@ class TestGuy extends \Codeception\AbstractGuy
      * Documentation taken from corresponding module.
      * ----------------------------------------------
      *
-     * Check if current page doesn't contain the text specified.
-     * Specify the css selector to match only specific region.
+     * @param string $text
+     * @param string $selector
      *
-     * Examples:
-     *
-     * ```php
-     * <?php
-     * $I->dontSee('Login'); // I can suppose user is already logged in
-     * $I->dontSee('Sign Up','h1'); // I can suppose it's not a signup page
-     * $I->dontSee('Sign Up','//body/h1'); // with XPath
-     * ?>
-     * ```
-     *
-     * @param $text
-     * @param null $selector
+     * @return void
      * @see Codeception\Util\Mink::dontSee()
      * @return \Codeception\Maybe
      */

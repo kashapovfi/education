@@ -32,9 +32,7 @@ $this->widget(
         'data'=>$model,
         'attributes'=>array(
             'id',
-            'code',
             'name',
-            'description',
         ),
     )
 ); ?>

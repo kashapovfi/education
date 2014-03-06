@@ -8,8 +8,6 @@
  * @property string $id
  * @property string $event_id
  * @property string $name
- * @property string $description
- * @property string $from
  * @property string $to
  * @property string $theme
  * @property string $body
@@ -64,16 +62,14 @@ class MailTemplate extends yupe\models\YModel
         // NOTE: you should only define rules for those attributes that
         // will receive user inputs.
         return array(
-            array('code, name, from, to, theme', 'filter', 'filter' => array($obj = new CHtmlPurifier(), 'purify')),
-            array('event_id, code, name, from, to, theme, body', 'required'),
+            array('name, to, theme', 'filter', 'filter' => array($obj = new CHtmlPurifier(), 'purify')),
+            array('event_id, name, to, theme, body', 'required'),
             array('status', 'numerical', 'integerOnly' => true),
             array('event_id', 'length', 'max' => 10),
-            array('name, from, to', 'length', 'max' => 300),
-            array('code', 'length', 'max' => 100),
-            array('code', 'unique'),
+            array('name, to', 'length', 'max' => 300),
             // The following rule is used by search().
             // Please remove those attributes that should not be searched.
-            array('id, event_id, name, description, from, to, theme, body, status', 'safe', 'on' => 'search'),
+            array('id, event_id, name, to, theme, body, status', 'safe', 'on' => 'search'),
         );
     }
 
@@ -102,12 +98,9 @@ class MailTemplate extends yupe\models\YModel
             'id'          => Yii::t('MailModule.mail', 'ID'),
             'event_id'    => Yii::t('MailModule.mail', 'Event'),
             'name'        => Yii::t('MailModule.mail', 'Title'),
-            'description' => Yii::t('MailModule.mail', 'Description'),
-            'from'        => Yii::t('MailModule.mail', 'From'),
             'to'          => Yii::t('MailModule.mail', 'For'),
             'theme'       => Yii::t('MailModule.mail', 'Topic'),
             'body'        => Yii::t('MailModule.mail', 'Message'),
-            'code'        => Yii::t('MailModule.mail', 'Symbolic code'),
             'status'      => Yii::t('MailModule.mail', 'Status'),
         );
     }
@@ -127,8 +120,6 @@ class MailTemplate extends yupe\models\YModel
         $criteria->compare('id', $this->id, true);
         $criteria->compare('event_id', $this->event_id, true);
         $criteria->compare('name', $this->name, true);
-        $criteria->compare('description', $this->description, true);
-        $criteria->compare('from', $this->from, true);
         $criteria->compare('to', $this->to, true);
         $criteria->compare('theme', $this->theme, true);
         $criteria->compare('body', $this->body, true);

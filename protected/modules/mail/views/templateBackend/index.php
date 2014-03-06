@@ -51,7 +51,6 @@ $this->widget('yupe\widgets\CustomGridView', array(
     'filter'       => $model,
     'columns'      => array(
         'id',
-        'code',
         array(
             'name'   => 'event_id',
             'value'  => '$data->event->name',
@@ -59,7 +58,6 @@ $this->widget('yupe\widgets\CustomGridView', array(
         ),
         'name',
         'theme',
-        'from',
         'to',
         array(
             'name'  => 'status',
@@ -67,6 +65,7 @@ $this->widget('yupe\widgets\CustomGridView', array(
         ),
         array(
             'class'=>'bootstrap.widgets.TbButtonColumn',
+            'template' => '{update} - {delete}'
         ),
     ),
 )); ?>
