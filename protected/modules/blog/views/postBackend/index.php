@@ -94,6 +94,19 @@ $this->menu = array(
             ),
 
             array(
+                'name'   => 'content',
+                'type'   => 'raw',
+                'value'  => '$data->content',
+            ),
+
+            array(
+                'name'   => 'progress',
+                'type'   => 'raw',
+                'value'  => 'Post::model()->getProgressAsString($data->progress)',
+            ),
+
+
+            array(
                 'class' => 'bootstrap.widgets.TbButtonColumn',
                 'template' => '{update} {delete}'
             ),

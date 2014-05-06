@@ -19,7 +19,7 @@
     <div class="yupe-widget-header">
         <i class="icon-star"></i>
 
-        <h3>My active plan</h3>
+        <h3>My active plan <b>[<?=date('F');?>]</b></h3>
 
         <div class="pull-right">
             <h3><span class="label <?php echo $status['class']; ?>"><?php echo $model->getProgressAsString($plan[0]->progress); ?></span></h3>

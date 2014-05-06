@@ -1,6 +1,6 @@
 <?php return array(
     'hiddenBackendModules' => array(
-        'comment', 'category', 'menu', 'yupe'
+        'comment', 'category', 'yupe'
     ),
     'months' => array(
         1 => 'January',

@@ -70,6 +70,9 @@ class ModuleManager extends \CApplicationComponent
              * Получаем модули и заполняем основные массивы
              **/
             foreach (Yii::app()->modules as $key => $value) {
+                if(in_array($key, Yii::app()->params->hiddenBackendModules))
+                    continue;
+
                 $key = strtolower($key);
                 $module = Yii::app()->getModule($key);
                 if (($module !== null)) {

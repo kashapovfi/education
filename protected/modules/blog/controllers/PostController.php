@@ -62,7 +62,8 @@ class PostController extends yupe\components\controllers\FrontController
                         yupe\widgets\YFlashMessages::SUCCESS_MESSAGE,
                         Yii::t('BlogModule.blog', 'Plan successfully created')
                     );
-                    $this->redirect('/');
+
+                    $this->redirect(Yii::app()->baseUrl);
                 }
             }
         } else {
@@ -70,7 +71,7 @@ class PostController extends yupe\components\controllers\FrontController
                 yupe\widgets\YFlashMessages::ERROR_MESSAGE,
                 Yii::t('BlogModule.blog', 'You can create plan. Plan already exist!')
             );
-            $this->redirect('/');
+            $this->redirect(Yii::app()->baseUrl);
         }
 
         $this->render('crud/create', array('model' => $model));
@@ -96,7 +97,7 @@ class PostController extends yupe\components\controllers\FrontController
                 Yii::t('BlogModule.blog', 'You can edit only own plan')
             );
 
-            $this->redirect('/');
+            $this->redirect(Yii::app()->baseUrl);
         }
 
         if ($model->progress == 5 AND !Yii::app()->user->getState('isAdmin')) {
@@ -105,7 +106,7 @@ class PostController extends yupe\components\controllers\FrontController
                 Yii::t('BlogModule.blog', 'You can\'t edit the completed plan!')
             );
 
-            $this->redirect('/');
+            $this->redirect(Yii::app()->baseUrl);
         }
 
         if (Yii::app()->getRequest()->getIsPostRequest() && Yii::app()->getRequest()->getPost('Post')) {
@@ -122,7 +123,7 @@ class PostController extends yupe\components\controllers\FrontController
                     Yii::t('BlogModule.blog', 'Plan was successfully updated')
                 );
 
-                $this->redirect('/');
+                $this->redirect(Yii::app()->baseUrl);
             }
         }
 

@@ -47,32 +47,12 @@ Yii::app()->clientScript->registerScriptFile($webrootAssets . '/js/edu.js');
     );?>
     <div class="row">
         <!-- content -->
-        <section class="span9 content">
+        <section class="span12 content">
             <!-- flashMessages -->
             <?php $this->widget('yupe\widgets\YFlashMessages'); ?>
             <?php echo $content; ?>
         </section>
         <!-- content end-->
-
-        <!-- sidebar -->
-        <aside style="display: none" class="span3 sidebar">
-            <?php if (Yii::app()->user->isAuthenticated()): ?>
-                <div class="widget last-login-users-widget">
-                    <?php $this->widget('application.modules.user.widgets.ProfileWidget'); ?>
-                </div>
-            <?php endif; ?>
-
-            <div class="widget last-login-users-widget">
-                <?php $this->widget(
-                    'application.modules.user.widgets.LastLoginUsersWidget',
-                    array(
-                        'cacheTime' => $this->yupe->coreCacheTime,
-                    )
-                ); ?>
-            </div>
-
-        </aside>
-        <!-- sidebar end -->
     </div>
 </div>
 <!-- container end -->

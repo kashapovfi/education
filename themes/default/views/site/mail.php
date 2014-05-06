@@ -1,10 +1,6 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta name="viewport" content="width=device-width"/>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-<title></title>
 <style type="text/css">
 /* -------------------------------------
 GLOBAL
@@ -320,12 +316,12 @@ ul.sidebar li a h1, ul.sidebar li a h2, ul.sidebar li a h3, ul.sidebar li a h4, 
 
 
 </style>
+<title><?=$title;?></title>
 </head>
 
 <body bgcolor="#fff">
-
 <!-- HEADER -->
-<table class="head-wrap" bgcolor="#fcfcfc">
+<table width="100%" class="head-wrap" bgcolor="#fcfcfc">
     <tr>
         <td></td>
         <td class="header container">
@@ -353,25 +349,13 @@ ul.sidebar li a h1, ul.sidebar li a h2, ul.sidebar li a h3, ul.sidebar li a h4, 
 <table class="body-wrap">
     <tr>
         <td></td>
-        <td class="container" bgcolor="#fff">
+        <td class="container" bgcolor="#ffffff">
 
             <div class="content">
                 <table>
                     <tr>
                         <td>
-                            <h3>Прувет землян</h3>
-
-                            <p class="lead">Phasellus dictum sapien a neque luctus cursus. Pellentesque sem dolor,
-                                fringilla et pharetra vitae.</p>
-
-                            <p>Phasellus dictum sapien a neque luctus cursus. Pellentesque sem dolor, fringilla et
-                                pharetra vitae. consequat vel lacus. Sed iaculis pulvinar ligula, ornare fringilla ante
-                                viverra et. In hac habitasse platea dictumst. Donec vel orci mi, eu congue justo.
-                                Integer eget odio est, eget malesuada lorem. Aenean sed tellus dui, vitae viverra risus.
-                                Nullam massa sapien, pulvinar eleifend fringilla id, convallis eget nisi. Mauris a
-                                sagittis dui. Pellentesque non lacinia mi. Fusce sit amet libero sit amet erat venenatis
-                                sollicitudin vitae vel eros. Cras nunc sapien, interdum sit amet porttitor ut, congue
-                                quis urna.</p>
+                            <?=$content;?>
                         </td>
                     </tr>
                 </table>

@@ -657,16 +657,20 @@ class Post extends yupe\models\YModel
         return $this->commentsCount > 0 ? $this->commentsCount - 1 : 0;
     }
 
-    public function getByMonth($month = false, $year = false)
+    public function getByMonth($month = false, $year = false, $user = null)
     {
+        $getString = is_null($user)
+            ? 'YEAR(FROM_UNIXTIME(publish_date)) = :year and MONTH(FROM_UNIXTIME(publish_date)) = :month'
+            : 'YEAR(FROM_UNIXTIME(publish_date)) = :year and MONTH(FROM_UNIXTIME(publish_date)) = :month and create_user_id = :userid';
+        $getStringValues = is_null($user)
+            ?  array(':year' => $year, ':month' => $month)
+            :  array(':year' => $year, ':month' => $month, ':userid' => $user);
+
         if ($month && $year) {
             $res = Yii::app()->db->createCommand()
                 ->select('*')
                 ->from('{{blog_post}}')
-                ->where(
-                    'YEAR(FROM_UNIXTIME(publish_date)) = :year and MONTH(FROM_UNIXTIME(publish_date)) = :month',
-                    array(':year' => $year, ':month' => $month)
-                )
+                ->where($getString, $getStringValues)
                 ->order('progress ASC')
                 ->setFetchMode(PDO::FETCH_OBJ)
                 ->queryAll();
@@ -694,5 +698,14 @@ class Post extends yupe\models\YModel
         }
 
         return false;
+    }
+
+    public function getByUser($userId = null) {
+        if(is_null($userId))
+            return false;
+
+        $reports = Post::model()->findAll('create_user_id = :create_user_id', array('create_user_id' => $userId));
+
+        return $reports ? $reports : false;
     }
 }

@@ -14,6 +14,7 @@
 class SiteController extends yupe\components\controllers\FrontController
 {
     const POST_PER_PAGE = 5;
+    const CRON_KEY = 'secret_cron_keyqmeter';
 
     public function actionModern()
     {
@@ -83,30 +84,118 @@ class SiteController extends yupe\components\controllers\FrontController
      *
      * TODO: After testing move to mail module
      */
-    public function actionCron()
+    public function actionCron($api = null)
     {
-        Yii::import('application.modules.mail.models.*');
-        /**
-         * 1) Нам треба подивитись які є івенти
-         * 2) Аналіз івента, якщо підходяща дата то грузим темплейт
-         * 3) Парсим темплейт, підставляєм дані і все-таке.
-         * 4) Відправляєм адресату
-         */
+        if (!$api || $api !== self::CRON_KEY) {
+            exit('What you want?');
+        } else {
+
+            Yii::import('application.modules.mail.models.*');
+
+            /**
+             * Алгоритм
+             *
+             * 1) Нам треба подивитись які є івенти
+             * 2) Аналіз івента, якщо підходяща дата то грузим темплейт
+             * 3) Парсим темплейт, підставляєм дані і все-таке.
+             * 4) Відправляєм адресату
+             */
 
 
-        $events = MailEvent::model()->findAll();
+            $events = MailEvent::model()->findAll();
+            $today = date('d', strtotime('today'));
 
-        foreach ($events as $event) {
-            //Якщо треба виконувати кожного місяця
-            if ((bool)$event->every_month) {
-                //Якщо день збігається з сьогоднішнім
-                if (date('d', strtotime('today')) === date('d', strtotime('2014-02-11'))) {
-                    $template = MailTemplate::model()->findAllByPk($event->id);
-                    if (count($template) >= 1) {
-                        var_dump($template);
+            foreach ($events as $event) {
+                //Якщо треба виконувати кожного місяця. Тобто маємо не одноразову подію
+                if ((bool)$event->every_month) {
+                    //Якщо день збігається з сьогоднішнім
+                    $eventDay = date('d', strtotime($event->date));
+
+                    if ($today === $eventDay) {
+                        //На один день в нас може бути декілька темплейтів, значить обходим їх
+                        $templates = MailTemplate::model()->findAllByAttributes(array('event_id' => $event->id));
+                        foreach ($templates as $template) {
+                            //Якщо статус активний
+                            if ($template->status) {
+                                //Кому відправляєм?
+                                if ($template->to == 'all') {
+                                    $users = User::model()->findAll();
+                                    //Ну і циклів тут %)
+                                    foreach ($users as $user) {
+                                        if ($this->_userHaveUndonedReport($user->id)) {
+                                            //Рендер темплейта
+                                            $mailHtml = $this->renderPartial(
+                                                'mail',
+                                                array(
+                                                    'title' => $template->theme,
+                                                    'content' => $template->body
+                                                ),
+                                                true
+                                            );
+
+                                            $SM = Yii::app()->swiftMailer;
+
+                                            $pEmailGmail = 'educations.reports.mailer@gmail.com';
+                                            $pFromName = 'Education Reports Notification';
+
+                                            $transport = Swift_SendmailTransport::newInstance('/usr/sbin/sendmail -bs');
+
+                                            $mMailer = Swift_Mailer::newInstance($transport);
+
+                                            $mEmail = Swift_Message::newInstance();
+                                            $mEmail->setSubject($template->name);
+                                            $mEmail->setTo($user->email);
+                                            $mEmail->setFrom(array($pEmailGmail => $pFromName));
+                                            $mEmail->setBody($mailHtml, 'text/html'); //body html
+
+                                            if ($mMailer->send($mEmail) !== 1) {
+                                                Yii::log('Message send error!');
+                                            }
+                                        } else {
+                                            continue;
+                                        }
+                                    }
+                                }
+                            } else {
+                                continue;
+                            }
+                        }
+                    } else {
+                        continue;
                     }
                 }
-            };
+            }
+        }
+
+    }
+
+    /**
+     * Хелпер функція, перевіримо чи юзер має не зазвітований звіт
+     * При відправці будемо дивитись, якщо в нього все ок то нема чого сіпати
+     *
+     * В майбутньому як фічу можна буде прикрутити щось типу:
+     * а) Маєш звіт не виконаний - паршивець, лист на ящик
+     * б) Маєш виконаний звіт - красавчик, лист подяки на ящик
+     */
+    private
+    function _userHaveUndonedReport(
+        $userid = null
+    ) {
+        if (!$userid) {
+            return false;
+        }
+
+        $user = User::model()->findByPk($userid);
+        if (!$user) {
+            throw new CException('User Not Exist!');
+        } else {
+            $report = Post::model()->getByMonth(date('m'), date('Y'), $userid);
+
+            if (isset($report[0])) {
+                return $report[0]->progress == 5 ? false : true;
+            }
+
+            return false;
         }
     }
 }

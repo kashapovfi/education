@@ -34,13 +34,7 @@ if (is_string($posts)) {
                 <div class="posts-list-block-meta panel-body">
                     <span>
                         <i class="icon-user"></i>
-
-                        <?php
-                        $this->widget(
-                            'application.modules.user.widgets.UserPopupInfoWidget', array(
-                                'model' => User::model()->findByPk($post->create_user_id)
-                            )
-                        ); ?>
+                        <?php $user = User::model()->findByPk($post->create_user_id); echo $user->first_name, ' ', $user->last_name; ?>
                     </span>
 
 
@@ -48,9 +42,13 @@ if (is_string($posts)) {
                         <i class="icon-calendar"></i>
 
                         <?php echo Yii::app()->getDateFormatter()->formatDateTime(
-                            $post->publish_date
+                            $post->publish_date, 'medium','short'
                         ); ?>
                     </span>
+
+                    <?php if(Yii::app()->user->id == $post->create_user_id): ?>
+                    <span><?php echo CHtml::link('<i class="icon-pencil"></i> [Edit]', array('post/update', 'id' => $post->id)); ?></span>
+            <?php endif; ?>
 
 
                 </div>
