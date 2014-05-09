@@ -43,6 +43,7 @@ return array(
     ),
     'import' => array(
         // подключение основых путей
+        'application.modules.yupe.components.behaviors.ActiveRecordLogBehavior',
         'application.modules.yupe.models.*',
         'application.modules.yupe.widgets.*',
         'application.modules.yupe.controllers.*',
@@ -60,14 +61,14 @@ return array(
             'cache' => true,
         ),
         // на продакшне gii рекомендуется отключить, подробнее: http://www.yiiframework.com/doc/guide/1.1/en/quickstart.first-app
-        /*'gii'   => array(
+        'gii'   => array(
             'class'          => 'system.gii.GiiModule',
             'password'       => 'giiYupe',
             'generatorPaths' => array(
                 'application.modules.yupe.extensions.yupe.gii',
             ),
             'ipFilters'=>array(),
-        ),*/
+        ),
     ),
     'behaviors' => array(
         'onBeginRequest' => array(

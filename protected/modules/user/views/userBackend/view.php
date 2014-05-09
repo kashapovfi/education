@@ -9,36 +9,7 @@ Yii::app()->clientScript->registerCssFile($mainAssets . '/css/last-posts.css');
     $this->breadcrumbs = array(Yii::t('UserModule.user', 'Users') => array('/user/userBackend/index'), $model->first_name . ' ' . $model->last_name,
     );
 
-    $this->pageTitle = Yii::t('UserModule.user', 'Users - show');
-
-//    $this->menu = array(
-//        array('label' => Yii::t('UserModule.user', 'Users'), 'items' => array(
-//            array('icon' => 'list-alt', 'label' => Yii::t('UserModule.user', 'Manage users'), 'url' => array('/user/userBackend/index')),
-//            array('icon' => 'plus-sign', 'label' => Yii::t('UserModule.user', 'Create user'), 'url' => array('/user/userBackend/create')),
-//            array('label' => Yii::t('UserModule.user', 'User') . ' «' . $model->nick_name . '»'),
-//            array('icon' => 'pencil', 'label' => Yii::t('UserModule.user', 'Edit user'), 'url' => array(
-//                '/user/userBackend/update',
-//                'id' => $model->id
-//            )),
-//            array('icon' => 'eye-open', 'label' => Yii::t('UserModule.user', 'Show user'), 'url' => array(
-//                '/user/userBackend/view',
-//                'id' => $model->id
-//            )),
-//            array('icon' => 'lock', 'label' => Yii::t('UserModule.user', 'Change user password'), 'url' => array(
-//                '/user/userBackend/changepassword',
-//                'id' => $model->id
-//            )),
-//            array('icon' => 'trash', 'label' => Yii::t('UserModule.user', 'Remove user'), 'url' => '#', 'linkOptions' => array(
-//                'submit' => array('/user/userBackend/delete', 'id' => $model->id),
-//                'params' => array(Yii::app()->getRequest()->csrfTokenName => Yii::app()->getRequest()->csrfToken),
-//                'confirm' => Yii::t('UserModule.user', 'Do you really want to remove user?')),
-//            ),
-//        )),
-//        array('label' => Yii::t('UserModule.user', 'Tokens'), 'items' => array(
-//            array('icon' => 'list-alt', 'label' => Yii::t('UserModule.user', 'Token list'), 'url' => array('/user/tokensBackend/index')),
-//        )),
-//    );
-?>
+    $this->pageTitle = Yii::t('UserModule.user', 'Users - show'); ?>
 <div class="page-header">
     <h1 style="text-align: center">
         <?php echo Yii::t('UserModule.user', 'Show user history'); ?><br />
@@ -51,13 +22,12 @@ Yii::app()->clientScript->registerCssFile($mainAssets . '/css/last-posts.css');
 <div class="alert alert-info"><h4 style="text-align: center; text-transform: uppercase">Latest reports: </h4></div>
 
 <?php $posts = Post::model()->getByUser($model->id); ?>
-<div class="posts">
+    <div class="posts well">
 
-    <div class="posts-list">
-        <?php
-        if(!empty($posts)) :
+        <?php if(!empty($posts)) : ?>
 
-        foreach ($posts as $post):
+        <div class="posts-list">
+    <?php foreach ($posts as $post):
             $status = $post->progress == 5
                 ? array('state' => array('disabled' => 'disabled', 'class' => 'btn btn-warning btn-large'))
                 : array('class' => 'btn-danger', 'state' => array('disabled' => 'disabled', 'class' => 'btn btn-warning btn-large'));
@@ -87,12 +57,20 @@ Yii::app()->clientScript->registerCssFile($mainAssets . '/css/last-posts.css');
         <?php endforeach; ?>
 
         <?php else: ?>
-        <div class=""
+        <h4 style="text-align: center">User doesn't have any reports yet</h4>
         <?php endif; ?>
 
     </div>
 </div>
 
 
-<div class="alert alert-error"><h4 style="text-align: center; text-transform: uppercase">Nonexistents reports: </h4></div>
+<div class="alert alert-error alert-block"><h4 style="text-align: center; text-transform: uppercase">Nonexistents reports: </h4></div>
 
+<?php foreach(Yii::app()->params->realMonths as $monthDig => $monthName): ?>
+    <?php $post = Post::model()->getByMonth($monthDig,  date('Y'), $model->id); if(!$post): ?>
+
+        <div class="well">
+            <p>Report for <strong><?php echo $monthName, ' ', date('Y'); ?> </strong> does't exist</p>
+        </div>
+    <?php endif; ?>
+<?php endforeach; ?>

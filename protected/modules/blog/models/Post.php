@@ -391,7 +391,6 @@ class Post extends yupe\models\YModel
     public function behaviors()
     {
         $module = Yii::app()->getModule('blog');
-
         return array(
             'CTimestampBehavior' => array(
                 'class' => 'zii.behaviors.CTimestampBehavior',
@@ -418,6 +417,8 @@ class Post extends yupe\models\YModel
                 'uploadPath' => $module->getUploadPath(),
                 'imageNameCallback' => array($this, 'generateFileName'),
             ),
+            'ActiveRecordLogBehavior'=>
+                'application.modules.yupe.components.behaviors.ActiveRecordLogBehavior',
         );
     }
 

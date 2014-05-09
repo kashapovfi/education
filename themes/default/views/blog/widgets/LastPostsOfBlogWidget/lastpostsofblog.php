@@ -16,7 +16,7 @@ if (is_string($posts)) {
 
 <div class="posts">
     <p class="posts-header">
-        <b>OUR PLANS IN THIS MONTH</b>
+        <b style="display: inline-block; background: #f0f0f0; padding: 3px;">OUR PLANS IN THIS MONTH</b>
     </p>
 
     <div class="posts-list">

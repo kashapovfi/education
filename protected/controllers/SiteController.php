@@ -89,7 +89,7 @@ class SiteController extends yupe\components\controllers\FrontController
         if (!$api || $api !== self::CRON_KEY) {
             exit('What you want?');
         } else {
-
+            
             Yii::import('application.modules.mail.models.*');
 
             /**
